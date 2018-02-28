@@ -1299,3 +1299,24 @@ avi:
             tender:  [0, 25]
             auction: [25, 30]
     timeout_on_wait: 10
+eauction:
+    intervals:
+        default:
+            enquiry: [0, 17]
+            tender:  [0, 19]
+        dgfFinancialAssets:
+           accelerator: 144
+           auction:  [35, 40]
+        dgfOtherAssets:
+            accelerator: 144
+            auction:  [35, 40]
+        dgfInsider:
+            accelerator: 720
+            auction:  [25, 30]
+    keywords_file: eauction
+    roles:
+        tender_owner:   eauction_Owner
+        provider:   eauction_Provider
+        provider1:   eauction_Provider1
+        viewer:   eauction_Viewer
+    timeout_on_wait: 1
