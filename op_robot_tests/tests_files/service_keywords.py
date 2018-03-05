@@ -40,6 +40,10 @@ from .initial_data import (
     test_tender_data,
     test_tender_data_dgf_other,
     create_fake_tenderAttempts,
+    create_fake_dgfID,
+    convert_days_to_seconds,
+    create_fake_title,
+    create_fake_description
 
 )
 from barbecue import chef
@@ -164,6 +168,13 @@ def convert_tender_attempts(attempts):
     elif attempts in [2, 3, 4, ]:
         return u"Лот виставляється повторно"
     raise ValueError(u"Cannot convert attempts")
+
+
+def compare_periods_duration(left, right, seconds):
+    left = parse(left)
+    right = parse(right)
+    delta = (right - left).total_seconds()
+    return delta >= seconds
 
 
 def log_object_data(data, file_name=None, format="yaml", update=False, artifact=False):
@@ -538,3 +549,7 @@ def compare_scheme_groups(length, *items):
 
 def convert_amount_string_to_float(amount_string):
     return float(amount_string.replace(' ', '').replace(',', '.').replace("'",''))
+
+
+def get_length_of_item(data, key):
+    return len(data.get(key, []))

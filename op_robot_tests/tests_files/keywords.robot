@@ -746,6 +746,13 @@ Require Failure
   ...      active.tendering
 
 
+Дочекатись дати закінчення періоду редагування лоту
+  [Arguments]  ${username}
+  wait_and_write_to_console  ${USERS.users['${username}'].tender_data.data.rectificationPeriod.endDate}
+  Оновити LAST_MODIFICATION_DATE
+  Дочекатись синхронізації з майданчиком  ${username}
+
+
 Дочекатись дати закінчення прийому пропозицій
   [Arguments]  ${username}  ${tender_uaid}
   # XXX: HACK: Same as above
@@ -782,17 +789,18 @@ Require Failure
   ...      active.auction
 
 
-Дочекатись дати початку періоду кваліфікації
+Дочекатись закінчення періоду аукціону
   [Arguments]  ${username}  ${tender_uaid}
   Оновити LAST_MODIFICATION_DATE
   Дочекатись синхронізації з майданчиком  ${username}
   Wait until keyword succeeds
   ...      90 min 15 sec
   ...      15 sec
+  ...      Run Keyword And Expect Error  *
   ...      Звірити статус тендера
   ...      ${username}
   ...      ${tender_uaid}
-  ...      active.qualification
+  ...      active.auction
 
 
 Оновити LAST_MODIFICATION_DATE
