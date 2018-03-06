@@ -1306,7 +1306,7 @@ eauction:
             tender:  [0, 19]
         dgfFinancialAssets:
            accelerator: 144
-           auction:  [65, 70]
+           auction:  [70, 75]
         dgfOtherAssets:
             accelerator: 144
             auction:  [65, 70]
