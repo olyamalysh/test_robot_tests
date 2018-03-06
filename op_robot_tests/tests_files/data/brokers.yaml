@@ -940,7 +940,7 @@ eauction:
             tender:  [0, 19]
         dgfOtherAssets:
             accelerator: 1440
-            auction:  [55, 60]
+            auction:  [60, 65]
     keywords_file: eauction
     roles:
         tender_owner:   eauction_Owner
