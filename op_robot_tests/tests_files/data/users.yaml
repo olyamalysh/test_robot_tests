@@ -706,3 +706,33 @@ users:
         browser:  chrome
         position: [0, 0]
         size:     [1100, 5000]
+    tender_stage_Owner:
+        broker:   tender_stage
+        homepage: "http://tender.byustudio.in.ua"
+        login:    formyqatesting@gmail.com
+        password: andriy85
+        browser:  Chrome
+        position: [0, 0]
+        size:     [1366, 800]
+    tender_stage_Provider:
+        broker:   tender_stage
+        homepage: "http://tender.byustudio.in.ua"
+        login:    uaceseller1@mail.ru
+        password: andriy85
+        browser:  Chrome
+        position: [0, 0]
+        size:     [1366, 800]
+    tender_stage_Provider1:
+        broker:   tender_stage
+        homepage: "http://tender.byustudio.in.ua"
+        login:    uaceseller2@mail.ru
+        password: andriy85
+        browser:  Chrome
+        position: [0, 0]
+        size:     [1366, 800]
+    tender_stage_Viewer:
+        broker:   tender_stage
+        homepage: "http://tender.byustudio.in.ua"
+        browser:  Chrome
+        position: [0, 0]
+        size:     [1366, 800]

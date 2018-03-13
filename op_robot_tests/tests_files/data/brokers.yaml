@@ -457,3 +457,33 @@ aladdin:
         provider1:      aladdin_Provider1
         viewer:         aladdin_Viewer
     timeout_on_wait: 1
+tender_stage:
+    intervals:
+        default:
+            accelerator: 720
+            enquiry: [0, 50]
+            tender:  [0, 15]
+        belowThreshold:
+            accelerator: 720
+            enquiry: [0, 20]
+            tender:  [0, 20]
+        openua:
+            accelerator: 720
+            tender:  [0, 60]
+        openeu:
+            accelerator: 720
+            tender:  [0, 71]
+        openua_defense:
+            accelerator: 720
+            tender:  [0, 71]
+        negotiation:
+            accelerator: 720
+            enquiry: [0, 20]
+            tender:  [0, 20]
+    keywords_file: tender_stage
+    roles:
+        tender_owner:   tender_stage_Owner
+        provider:       tender_stage_Provider
+        provider1:      tender_stage_Provider1
+        viewer:         tender_stage_Viewer
+    timeout_on_wait: 180
