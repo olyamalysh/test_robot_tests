@@ -486,4 +486,4 @@ tender_stage:
         provider:       tender_stage_Provider
         provider1:      tender_stage_Provider1
         viewer:         tender_stage_Viewer
-    timeout_on_wait: 240
+    timeout_on_wait: 360
