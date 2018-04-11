@@ -1312,7 +1312,7 @@ eauction:
             auction:  [65, 70]
         dgfInsider:
             accelerator: 720
-            auction:  [25, 30]
+            auction:  [10, 15]
     keywords_file: eauction
     roles:
         tender_owner:   eauction_Owner
