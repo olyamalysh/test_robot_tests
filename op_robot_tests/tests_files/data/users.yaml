@@ -50,7 +50,7 @@ users:
             auctions: [test.quintagroup.com, bc698baa8b814908bc75405ed3d63548]
         api_key:  ""
         broker:   Quinta
-        browser:  firefox
+        browser:  Chrome
         auth_edr: [test.quintagroup.com, f5111c99a97a45348d8165ba8fcf0d62]
         position: [0, 0]
         size:     [1400, 900]
