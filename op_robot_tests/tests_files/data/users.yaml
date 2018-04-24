@@ -730,6 +730,14 @@ users:
         browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
+    tender_stage_Provider2:
+        broker:   tender_stage
+        homepage: "http://tender.byustudio.in.ua"
+        login:    uaceseller3@gmail.com
+        password: andriy85
+        browser:  Chrome
+        position: [0, 0]
+        size:     [1366, 800]
     tender_stage_Viewer:
         broker:   tender_stage
         homepage: "http://tender.byustudio.in.ua"
