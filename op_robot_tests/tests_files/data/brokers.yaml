@@ -485,5 +485,6 @@ tender_stage:
         tender_owner:   tender_stage_Owner
         provider:       tender_stage_Provider
         provider1:      tender_stage_Provider1
+        provider2:      tender_stage_Provider2
         viewer:         tender_stage_Viewer
     timeout_on_wait: 360
