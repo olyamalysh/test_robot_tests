@@ -469,7 +469,7 @@ tender_stage:
             tender:  [0, 20]
         openua:
             accelerator: 720
-            tender:  [0, 75]
+            tender:  [0, 90]
         openeu:
             accelerator: 720
             tender:  [0, 71]
