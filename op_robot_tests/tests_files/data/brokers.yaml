@@ -462,7 +462,7 @@ tender_stage:
         default:
             accelerator: 720
             enquiry: [0, 50]
-            tender:  [0, 15]
+            tender:  [0, 35]
         belowThreshold:
             accelerator: 720
             enquiry: [0, 20]
