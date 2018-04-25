@@ -474,7 +474,7 @@ tender_stage:
             accelerator: 720
             tender:  [0, 71]
         openua_defense:
-            accelerator: 540
+            accelerator: 360
             tender:  [0, 90]
         negotiation:
             accelerator: 720
