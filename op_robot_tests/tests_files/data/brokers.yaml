@@ -472,7 +472,7 @@ tender_stage:
             tender:  [0, 110]
         openeu:
             accelerator: 720
-            tender:  [0, 71]
+            tender:  [0, 110]
         openua_defense:
             accelerator: 360
             tender:  [0, 90]
