@@ -328,7 +328,7 @@ ${MOZ_INTEGRATION}  ${False}
 
 Відображення заголовку лотів
   [Tags]   ${USERS.users['${viewer}'].broker}: Відображення лоту тендера
-  ...      viewer  tender_owner  provider  provider1
+  ...      viewer  tender_owner  provider  provider1  provider2
   ...      ${USERS.users['${viewer}'].broker}  ${USERS.users['${tender_owner}'].broker}
   ...      ${USERS.users['${provider}'].broker}  ${USERS.users['${provider1}'].broker}
   ...      lot_view  level1
