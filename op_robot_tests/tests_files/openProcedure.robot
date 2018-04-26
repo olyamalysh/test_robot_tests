@@ -331,6 +331,7 @@ ${MOZ_INTEGRATION}  ${False}
   ...      viewer  tender_owner  provider  provider1  provider2
   ...      ${USERS.users['${viewer}'].broker}  ${USERS.users['${tender_owner}'].broker}
   ...      ${USERS.users['${provider}'].broker}  ${USERS.users['${provider1}'].broker}
+  ...      ${USERS.users['${provider2}'].broker}
   ...      lot_view  level1
   ...      critical
   Звірити відображення поля title усіх лотів для усіх користувачів
