@@ -162,7 +162,7 @@ Resource           resource.robot
 
 
 Звірити відображення поля ${field} тендера для усіх користувачів
-  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}
+  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}  ${provider2}
   \  Звірити відображення поля ${field} тендера для користувача ${username}
 
 
@@ -212,7 +212,7 @@ Resource           resource.robot
 
 
 Звірити відображення дати ${date} тендера для усіх користувачів
-  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}
+  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}  ${provider2}
   \  Звірити відображення дати ${date} тендера для користувача ${username}
 
 
@@ -293,7 +293,7 @@ Resource           resource.robot
 
 
 Отримати дані із поля ${field} тендера для усіх користувачів
-  :FOR  ${username}  IN  ${viewer}  ${provider}  ${provider1}  ${tender_owner}
+  :FOR  ${username}  IN  ${viewer}  ${provider}  ${provider1}  ${provider2}  ${tender_owner}
   \  Отримати дані із поля ${field} тендера для користувача ${username}
 
 
