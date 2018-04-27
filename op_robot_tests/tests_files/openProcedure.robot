@@ -330,8 +330,7 @@ ${MOZ_INTEGRATION}  ${False}
   [Tags]   ${USERS.users['${viewer}'].broker}: Відображення лоту тендера
   ...      viewer  tender_owner  provider  provider1  provider2
   ...      ${USERS.users['${viewer}'].broker}  ${USERS.users['${tender_owner}'].broker}
-  ...      ${USERS.users['${provider}'].broker}  ${USERS.users['${provider1}'].broker}
-  ...      ${USERS.users['${provider2}'].broker}
+  ...      ${USERS.users['${provider}'].broker}  ${USERS.users['${provider1}'].broker}  ${USERS.users['${provider2}'].broker}
   ...      lot_view  level1
   ...      critical
   Звірити відображення поля title усіх лотів для усіх користувачів
@@ -1637,9 +1636,9 @@ ${MOZ_INTEGRATION}  ${False}
 
 
 Можливість подати пропозицію третім учасником
-  [Tags]   ${USERS.users['${provider1}'].broker}: Подання пропозиції
+  [Tags]   ${USERS.users['${provider2}'].broker}: Подання пропозиції
   ...      provider2
-  ...      ${USERS.users['${provider1}'].broker}
+  ...      ${USERS.users['${provider2}'].broker}
   ...      make_bid_by_provider2  level1
   ...      critical
   [Setup]  Дочекатись дати початку прийому пропозицій  ${provider2}  ${TENDER['TENDER_UAID']}
@@ -1809,9 +1808,9 @@ ${MOZ_INTEGRATION}  ${False}
 
 
 Можливість підтвердити цінову пропозицію після зміни умов третьому учаснику
-  [Tags]   ${USERS.users['${provider1}'].broker}: Подання пропозиції
+  [Tags]   ${USERS.users['${provider2}'].broker}: Подання пропозиції
   ...      provider2
-  ...      ${USERS.users['${provider1}'].broker}
+  ...      ${USERS.users['${provider2}'].broker}
   ...      open_confirm_third_bid
   ...      non-critical
   [Teardown]  Оновити LAST_MODIFICATION_DATE
