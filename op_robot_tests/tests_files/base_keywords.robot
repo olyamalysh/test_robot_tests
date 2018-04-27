@@ -390,7 +390,7 @@ Resource           resource.robot
 
 
 Звірити відображення поля ${field} усіх лотів для усіх користувачів
-  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}
+  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}  ${provider2}
   \  Звірити відображення поля ${field} усіх лотів для користувача ${username}
 
 
