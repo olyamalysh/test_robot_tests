@@ -482,7 +482,7 @@ tender_stage:
             tender:  [0, 20]
         open_competitive_dialogue:
             accelerator: 720
-            tender:  [0, 110]
+            tender:  [0, 120]
 
     keywords_file: tender_stage
     roles:
