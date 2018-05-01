@@ -497,7 +497,7 @@ Resource           resource.robot
 
 
 Звірити відображення поля ${field} у новоствореному неціновому показнику для усіх користувачів
-  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}
+  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}  ${provider2}
   \  Звірити відображення поля ${field} у новоствореному неціновому показнику для користувача ${username}
 
 
