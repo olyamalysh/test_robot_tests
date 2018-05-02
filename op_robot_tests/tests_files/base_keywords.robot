@@ -75,7 +75,7 @@ Resource           resource.robot
 
 
 Можливість знайти тендер за кошти донора для усіх користувачів
-  :FOR  ${username}  IN  ${tender_owner}  ${provider}  ${provider1}  ${viewer}
+  :FOR  ${username}  IN  ${tender_owner}  ${provider}  ${provider1}  ${provider2}  ${viewer}
   \  Можливість знайти тендер за кошти донора для користувача ${username}
 
 
@@ -279,7 +279,7 @@ Resource           resource.robot
 
 
 Звірити відображення поля ${field} усіх донорів для усіх користувачів
-  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}
+  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}  ${provider2}
   \  Звірити відображення поля ${field} усіх донорів для користувача ${username}
 
 
@@ -395,7 +395,7 @@ Resource           resource.robot
 
 
 Звірити відображення поля ${field} усіх лотів другого етапу для усіх користувачів
-  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}
+  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}  ${provider2}
   \  Звірити відображення поля ${field} усіх лотів другого етапу для користувача ${username}
 
 
@@ -430,7 +430,7 @@ Resource           resource.robot
 
 
 Звірити відображення поля ${field} у новоствореному лоті для усіх користувачів
-  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}
+  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}  ${provider2}
   \  Звірити відображення поля ${field} у новоствореному лоті для користувача ${username}
 
 
@@ -531,7 +531,7 @@ Resource           resource.robot
   ${feature_id}=  get_id_from_object  ${USERS.users['${tender_owner}'].tender_data.data['features'][${feature_index}]}
   Run As  ${tender_owner}  Видалити неціновий показник  ${TENDER['TENDER_UAID']}  ${feature_id}
   ${feature_index}=  get_object_index_by_id  ${USERS.users['${tender_owner}'].tender_data.data['features']}  ${feature_id}
-  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}  ${provider2}
+  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}
   \  Remove From List  ${USERS.users['${username}'].tender_data.data['features']}  ${feature_index}
 
 
@@ -672,7 +672,7 @@ Resource           resource.robot
 
 
 Звірити відображення поля ${field} запитання на тендер для усіх користувачів
-  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}
+  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}  ${provider2}
   \  Звірити відображення поля ${field} запитання на тендер для користувача ${username}
 
 
@@ -681,7 +681,7 @@ Resource           resource.robot
 
 
 Звірити відображення поля ${field} запитання на ${item_index} предмет для усіх користувачів
-  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}
+  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}  ${provider2}
   \  Звірити відображення поля ${field} запитання на ${item_index} предмет для користувача ${username}
 
 
@@ -690,7 +690,7 @@ Resource           resource.robot
 
 
 Звірити відображення поля ${field} запитання на ${lot_index} лот для усіх користувачів
-  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}
+  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}  ${provider2}
   \  Звірити відображення поля ${field} запитання на ${lot_index} лот для користувача ${username}
 
 
