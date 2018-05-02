@@ -44,9 +44,9 @@ ${award_index}      ${0}
 
 Відображення заголовку лотів
   [Tags]  ${USERS.users['${viewer}'].broker}: Відображення лоту тендера
-  ...     viewer  tender_owner  provider  provider1
+  ...     viewer  tender_owner  provider  provider1  provider2
   ...     ${USERS.users['${viewer}'].broker}  ${USERS.users['${tender_owner}'].broker}
-  ...     ${USERS.users['${provider}'].broker}  ${USERS.users['${provider1}'].broker}
+  ...     ${USERS.users['${provider}'].broker}  ${USERS.users['${provider1}'].broker}  ${USERS.users['${provider2}'].broker}
   ...     tender_view
   ...     critical
   Звірити відображення поля title усіх лотів для усіх користувачів

@@ -30,9 +30,9 @@ ${MOZ_INTEGRATION}  ${False}
 
 Можливість знайти тендер по ідентифікатору
   [Tags]   ${USERS.users['${viewer}'].broker}: Пошук тендера
-  ...      viewer  tender_owner  provider  provider1  provider2
+  ...      viewer  tender_owner  provider  provider1
   ...      ${USERS.users['${viewer}'].broker}  ${USERS.users['${tender_owner}'].broker}
-  ...      ${USERS.users['${provider}'].broker}  ${USERS.users['${provider1}'].broker}  ${USERS.users['${provider2}'].broker}
+  ...      ${USERS.users['${provider}'].broker}  ${USERS.users['${provider1}'].broker}
   ...      find_tender  level1
   ...      critical
   Можливість знайти тендер по ідентифікатору для усіх користувачів
