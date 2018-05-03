@@ -468,7 +468,7 @@ tender_stage:
             enquiry: [0, 20]
             tender:  [0, 20]
         openua:
-            accelerator: 540
+            accelerator: 360
             tender:  [0, 120]
         openeu:
             accelerator: 720
