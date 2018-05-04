@@ -94,7 +94,7 @@ users:
         broker:   DZOauctions
         homepage: "http://dz3.byustudio.in.ua"
         login:    formyqatesting@gmail.com
-        password: d4EPYXkAQ
+        password: andriy85
         browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
@@ -102,7 +102,7 @@ users:
         broker:   DZOauctions
         homepage: "http://dz3.byustudio.in.ua"
         login:    uaceseller1@mail.ru
-        password: mux85BMrH
+        password: andriy85
         browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
@@ -110,7 +110,7 @@ users:
         broker:   DZOauctions
         homepage: "http://dz3.byustudio.in.ua"
         login:    uaceseller2@mail.ru
-        password: Z5FeM44kK
+        password: andriy85
         browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
