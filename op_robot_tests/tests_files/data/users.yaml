@@ -1997,6 +1997,8 @@ users:
     eauction_Viewer:
         broker:   eauction
         homepage: "http://eauction.byustudio.in.ua"
+        login:    uaceseller3@gmail.com
+        password: andriy85
         browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
