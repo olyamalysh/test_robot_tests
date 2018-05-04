@@ -947,4 +947,4 @@ eauction:
         provider:   eauction_Provider
         provider1:   eauction_Provider1
         viewer:   eauction_Viewer
-    timeout_on_wait: 180
+    timeout_on_wait: 360
