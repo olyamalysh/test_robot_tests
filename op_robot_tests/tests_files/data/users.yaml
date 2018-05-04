@@ -93,7 +93,7 @@ users:
     DZO_Owner_auction:
         broker:   DZOauctions
         homepage: "http://dz3.byustudio.in.ua"
-        login:    prozorroytenderowner@gmail.com
+        login:    formyqatesting@gmail.com
         password: d4EPYXkAQ
         browser:  Chrome
         position: [0, 0]
@@ -101,7 +101,7 @@ users:
     DZO_Provider_auction:
         broker:   DZOauctions
         homepage: "http://dz3.byustudio.in.ua"
-        login:    dzoprovider1@gmail.com
+        login:    uaceseller1@mail.ru
         password: mux85BMrH
         browser:  Chrome
         position: [0, 0]
@@ -109,7 +109,7 @@ users:
     DZO_Provider1_auction:
         broker:   DZOauctions
         homepage: "http://dz3.byustudio.in.ua"
-        login:    dzoprovider2@gmail.com
+        login:    uaceseller2@mail.ru
         password: Z5FeM44kK
         browser:  Chrome
         position: [0, 0]
