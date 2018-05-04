@@ -176,7 +176,7 @@ def test_tender_data(params, periods=("enquiry", "tender")):
     data["procuringEntity"]["kind"] = "other"
 
     data['rectificationPeriod'] = {
-            "endDate": (get_now() + timedelta(minutes=(random.randint(5, 19) * 1440) / accelerator)).isoformat(),
+            "endDate": (get_now() + timedelta(minutes=((int(params['intervals']['auction'][0]) - 15) * 1440) / accelerator)).isoformat(),
     }
 
     scheme_group = fake.scheme_other()[:4]
