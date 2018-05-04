@@ -251,7 +251,7 @@ def test_bid_value(max_value_amount, minimalStep):
         "value": {
             "currency": "UAH",
             "amount": round(random.uniform(1, 1.05)*(max_value_amount + minimalStep), 2),
-            "valueAddedTaxIncluded": True
+            "valueAddedTaxIncluded": False
         }
     })
 
@@ -265,7 +265,7 @@ def test_supplier_data():
             "value": {
                 "amount": fake.random_int(min=1),
                 "currency": "UAH",
-                "valueAddedTaxIncluded": True
+                "valueAddedTaxIncluded": False
             },
             "qualified": True
         }
