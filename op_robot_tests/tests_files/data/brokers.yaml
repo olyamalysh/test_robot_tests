@@ -83,7 +83,7 @@ DZOauctions:
             enquiry: [0, 20]
             tender:  [0, 20]
         dgfOtherAssets:
-            accelerator: 720
+            accelerator: 1440
             auction:  [85, 90]
     keywords_file: dzo
     roles:
