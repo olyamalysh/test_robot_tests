@@ -1977,7 +1977,7 @@ users:
         password: andriy85
         browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1366, 5000]
     eauction_Provider:
         broker:   eauction
         homepage: "http://eauction.byustudio.in.ua"
@@ -1985,7 +1985,7 @@ users:
         password: andriy85
         browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1366, 5000]
     eauction_Provider1:
         broker:   eauction
         homepage: "http://eauction.byustudio.in.ua"
@@ -1993,7 +1993,7 @@ users:
         password: andriy85
         browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1366, 5000]
     eauction_Viewer:
         broker:   eauction
         homepage: "http://eauction.byustudio.in.ua"
@@ -2001,4 +2001,4 @@ users:
         password: andriy85
         browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1366, 5000]
