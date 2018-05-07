@@ -14,6 +14,10 @@
 -i tender_view_unit_code
 -i tender_view_tenderAttempts
 
+-i modify_auction_title
+-i modify_auction_description
+-i modify_tenderAttempts
+-i modify_dgfID
 -i modify_auction_value
 -i modify_auction_value_tax
 -i modify_auction_step
@@ -57,6 +61,7 @@
 
 -i auction
 -i auction_url
+-i auction_url_provider1
 -i auction_url_provider2
 -i auction_end_date
 
