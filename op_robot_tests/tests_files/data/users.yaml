@@ -1975,7 +1975,7 @@ users:
         homepage: "http://eauction.byustudio.in.ua"
         login:    formyqatesting@gmail.com
         password: andriy85
-        browser:  firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 5000]
     eauction_Provider:
@@ -1983,7 +1983,7 @@ users:
         homepage: "http://eauction.byustudio.in.ua"
         login:    uaceseller1@mail.ru
         password: andriy85
-        browser:  firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 5000]
     eauction_Provider1:
@@ -1991,7 +1991,7 @@ users:
         homepage: "http://eauction.byustudio.in.ua"
         login:    uaceseller2@mail.ru
         password: andriy85
-        browser:  firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 5000]
     eauction_Viewer:
@@ -1999,6 +1999,6 @@ users:
         homepage: "http://eauction.byustudio.in.ua"
         login:    uaceseller3@gmail.com
         password: andriy85
-        browser:  firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 5000]
