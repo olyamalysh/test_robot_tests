@@ -22,9 +22,6 @@
 -i modify_auction_value_tax
 -i modify_auction_step
 -i modify_auction_guarantee
-
--i check_rectification_period
-
 -i modify_auction_periods		
 -i modify_tender
 -i add_tender_doc
@@ -51,6 +48,9 @@
 -i confirm_first_bid
 -i confirm_second_bid
 -i confirm_third_bid
+
+-i check_rectification_period
+
 -i bid_view_in_tendering_period
 
 
