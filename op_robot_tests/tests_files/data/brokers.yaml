@@ -933,3 +933,18 @@ tsbgalcontract:
             tender:  [0, 25]
             auction: [25, 30]
     timeout_on_wait: 10
+eauction:
+    intervals:
+        default:
+            enquiry: [0, 17]
+            tender:  [0, 19]
+        dgfOtherAssets:
+            accelerator: 1440
+            auction:  [100, 105]
+    keywords_file: eauction
+    roles:
+        tender_owner:   eauction_Owner
+        provider:   eauction_Provider
+        provider1:   eauction_Provider1
+        viewer:   eauction_Viewer
+    timeout_on_wait: 360

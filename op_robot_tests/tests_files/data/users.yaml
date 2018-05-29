@@ -103,24 +103,24 @@ users:
     DZO_Owner_auction:
         broker:   DZOauctions
         homepage: "http://dz3.byustudio.in.ua"
-        login:    prozorroytenderowner@gmail.com
-        password: d4EPYXkAQ
+        login:    formyqatestin.g@gmail.com
+        password: andriy85
         browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     DZO_Provider_auction:
         broker:   DZOauctions
         homepage: "http://dz3.byustudio.in.ua"
-        login:    dzoprovider1@gmail.com
-        password: mux85BMrH
+        login:    uaceseller1@mail.ru
+        password: andriy85
         browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     DZO_Provider1_auction:
         broker:   DZOauctions
         homepage: "http://dz3.byustudio.in.ua"
-        login:    dzoprovider2@gmail.com
-        password: Z5FeM44kK
+        login:    uaceseller2@mail.ru
+        password: andriy85
         browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
@@ -1980,3 +1980,34 @@ users:
         browser:  chrome
         position: [0, 0]
         size:     [1366, 800]
+    eauction_Owner:
+        broker:   eauction
+        homepage: "http://eauction.byustudio.in.ua"
+        login:    formyqatestin.g@gmail.com
+        password: andriy85
+        browser:  Chrome
+        position: [0, 0]
+        size:     [1366, 5000]
+    eauction_Provider:
+        broker:   eauction
+        homepage: "http://eauction.byustudio.in.ua"
+        login:    uaceseller1@mail.ru
+        password: andriy85
+        browser:  Chrome
+        position: [0, 0]
+        size:     [1366, 5000]
+    eauction_Provider1:
+        broker:   eauction
+        homepage: "http://eauction.byustudio.in.ua"
+        login:    uaceseller2@mail.ru
+        password: andriy85
+        browser:  Chrome
+        position: [0, 0]
+        size:     [1366, 5000]
+    eauction_Viewer:
+        broker:   eauction
+        homepage: "http://eauction.byustudio.in.ua"
+        password: andriy85
+        browser:  Chrome
+        position: [0, 0]
+        size:     [1366, 5000]
