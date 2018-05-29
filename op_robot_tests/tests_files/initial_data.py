@@ -57,6 +57,14 @@ def create_fake_dgfID():
     return fake.dgfID()
 
 
+def create_fake_decisionDate():
+    return (get_now() + timedelta(days=-2)).isoformat()
+
+
+def create_fake_decisionID():
+    return fake.dgfDecisionID()
+
+
 def convert_days_to_seconds(days, accelerator):
     seconds = timedelta(days=int(days)).total_seconds()
     return seconds / accelerator
@@ -77,6 +85,22 @@ def create_fake_minimal_step(value_amount):
 def create_fake_guarantee(value_amount):
     # Required guarantee deposit must not be greater than 500 000 UAH
     return round(random.uniform(0.02, 0.1) * value_amount, 2)
+
+
+def create_fake_item_description():
+    return field_with_id("i", fake.title())
+
+
+def create_fake_scheme_id(scheme_id):
+    return fake.scheme_other(scheme_id)
+
+
+def create_fake_items_quantity():
+    return round(random.uniform(5, 10), 4)
+
+
+def cretate_fake_unit_name():
+    return random.choice([u'гектар', u'кілометри', u'штуки', u'блок', u'метри кубічні'])
 
 
 def create_fake_cancellation_reason():
@@ -176,7 +200,7 @@ def test_tender_data(params, periods=("enquiry", "tender")):
     data["procuringEntity"]["kind"] = "other"
 
     data['rectificationPeriod'] = {
-            "endDate": (get_now() + timedelta(minutes=(params['intervals']['auction'][0] - 15))).isoformat(),
+            "endDate": (get_now() + timedelta(minutes=(random.randint(5, 19) * 1440) / accelerator)).isoformat(),
     }
 
     scheme_group = fake.scheme_other()[:4]
@@ -199,6 +223,83 @@ def test_tender_data(params, periods=("enquiry", "tender")):
     data.update(period_dict)
 
     return munchify(data)
+
+
+def test_asset_data(params):
+    test_asset_data = {
+        "title": u"[ТЕСТУВАННЯ] {}".format(fake.title()),
+        "title_en": u"[TESTING] {}".format(fake_en.catch_phrase()),
+        "title_ru": u"[ТЕСТИРОВАНИЕ] {}".format(fake_ru.catch_phrase()),
+        "description": fake.description(),
+        "description_en": fake_en.sentence(nb_words=10, variable_nb_words=True),
+        "description_ru": fake_ru.sentence(nb_words=10, variable_nb_words=True),
+        "assetType": 'domain',
+        "mode": "test",
+        "items": [],
+        "decisions": [{
+            "title": fake.title(),
+            "title_en": fake_en.catch_phrase(),
+            "title_ru": fake_ru.catch_phrase(),
+            "decisionDate": create_fake_decisionDate(),
+            "decisionID": create_fake_decisionID()
+        }],
+        "assetCustodian": fake.procuringEntity(),
+        "assetHolder": fake.procuringEntity(),
+    }
+    scheme_group = fake.scheme_other()[:3]
+    for i in range(params['number_of_items']):
+        new_item = test_item_data(scheme_group)
+        new_item["registrationDetails"]= {
+            "status": 'registering'
+    }
+        test_asset_data['items'].append(new_item)
+    return munchify(test_asset_data)
+
+
+def test_lot_data(assets_id, params):
+    lot_data = {
+        "assets": assets_id,
+        "lotType": "loki",
+        "decisions": [{
+            "decisionDate": (get_now() + timedelta(days=-2)).isoformat(),
+            "decisionID": fake.dgfDecisionID()
+        }],
+        "mode": "test"
+    }
+    return munchify(lot_data)
+
+
+def test_lot_auctions_data(lot_data, index):
+    if index == '0':
+        value_amount = create_fake_amount(3000, 999999999.99)
+        lot_data.update({
+            "value": {
+                "amount": value_amount,
+                "currency": u"UAH",
+                "valueAddedTaxIncluded": False
+            },
+            "guarantee": {
+                "amount": create_fake_guarantee(value_amount),
+                "currency": u"UAH"
+            },
+            "minimalStep": {
+                "amount": create_fake_minimal_step(value_amount),
+                "currency": u"UAH",
+                "valueAddedTaxIncluded": False
+            },
+            "registrationFee": {
+                "amount": create_fake_guarantee(value_amount),
+                "currency": u"UAH"
+            },
+            "auctionPeriod": {
+                "startDate": (get_now() + timedelta(days=2)).isoformat()
+            }
+        })
+    else:
+        lot_data.update({
+            "tenderingDuration": 'P1M'
+        })
+    return munchify(lot_data)
 
 
 def test_question_data():
@@ -251,7 +352,7 @@ def test_bid_value(max_value_amount, minimalStep):
         "value": {
             "currency": "UAH",
             "amount": round(random.uniform(1, 1.05)*(max_value_amount + minimalStep), 2),
-            "valueAddedTaxIncluded": False
+            "valueAddedTaxIncluded": True
         }
     })
 
@@ -265,7 +366,7 @@ def test_supplier_data():
             "value": {
                 "amount": fake.random_int(min=1),
                 "currency": "UAH",
-                "valueAddedTaxIncluded": False
+                "valueAddedTaxIncluded": True
             },
             "qualified": True
         }
@@ -280,12 +381,7 @@ def test_item_data(scheme):
     data["description"] = field_with_id("i", data["description"])
     data["description_en"] = field_with_id("i", data["description_en"])
     data["description_ru"] = field_with_id("i", data["description_ru"])
-    days = fake.random_int(min=1, max=30)
-    data["contractPeriod"] = {
-                "startDate": get_now().replace(hour=0, minute=0, second=0, microsecond=0).isoformat(),
-                "endDate": get_now().replace(hour=0, minute=0, second=0, microsecond=0).isoformat()
-    }
-    data["quantity"] = round(random.uniform(1, 10), 3)
+    data["quantity"] = round(random.uniform(1, 5), 4)
     return munchify(data)
 
 

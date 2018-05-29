@@ -20,9 +20,6 @@
 -i modify_auction_value_tax
 -i modify_auction_step
 -i modify_auction_guarantee
-
--i check_rectification_period
-
 -i modify_auction_periods		
 -i modify_tender
 -i add_tender_doc
