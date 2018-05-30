@@ -107,7 +107,7 @@ users:
         password: andriy85
         browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1366, 1200]
     DZO_Provider_auction:
         broker:   DZOauctions
         homepage: "http://dz3.byustudio.in.ua"
@@ -115,7 +115,7 @@ users:
         password: andriy85
         browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1366, 1200]
     DZO_Provider1_auction:
         broker:   DZOauctions
         homepage: "http://dz3.byustudio.in.ua"
@@ -123,13 +123,13 @@ users:
         password: andriy85
         browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1366, 1200]
     DZO_Viewer_auction:
         broker:   DZOauctions
         homepage: "http://dz3.byustudio.in.ua/?test_mode=guest"
         browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1366, 1200]
     uace_Owner_auction:
         broker:   uaceauction
         homepage: "http://test-eauction.uace.com.ua"
