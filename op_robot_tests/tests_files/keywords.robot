@@ -161,74 +161,16 @@ Get Broker Property By Username
   Run Keyword And Return  Get Broker Property  ${broker_name}  ${property}
 
 
-# Створити артефакт
-#   ${artifact}=  Create Dictionary
-#   ...      api_version=${api_version}
-#   ...      tender_uaid=${TENDER['TENDER_UAID']}
-#   ...      last_modification_date=${TENDER['LAST_MODIFICATION_DATE']}
-#   ...      mode=${MODE}
-#   Run Keyword If  '${MODE}'=='assets'  Set To Dictionary  ${artifact}
-#   ...  assets_id=${assets_id}
-#   ...  asset_access_token=${USERS.users['${tender_owner}'].access_token}
-#   Run Keyword And Ignore Error  Set To Dictionary  ${artifact}
-#   ...          tender_owner=${USERS.users['${tender_owner}'].broker}
-#   ...          access_token=${USERS.users['${tender_owner}'].access_token}
-#   ...          tender_id=${USERS.users['${tender_owner}'].tender_data.data.id}
-#   Run Keyword And Ignore Error  Set To Dictionary  ${artifact}  tender_owner_access_token=${USERS.users['${tender_owner}'].access_token}
-#   Run Keyword And Ignore Error  Set To Dictionary  ${artifact}  provider_access_token=${USERS.users['${provider}'].access_token}
-#   Run Keyword And Ignore Error  Set To Dictionary  ${artifact}  provider1_access_token=${USERS.users['${provider1}'].access_token}
-#   Run Keyword And Ignore Error  Set To Dictionary  ${artifact}  provider_bid_id=${USERS.users['${provider}'].bid_id}
-#   Run Keyword And Ignore Error  Set To Dictionary  ${artifact}  provider1_bid_id=${USERS.users['${provider1}'].bid_id}
-#   Log   ${artifact}
-#   log_object_data  ${artifact}  file_name=artifact  update=${True}  artifact=${True}
-
-
-
-# Створити артефакт
-#   ${file_path}=  Get Variable Value  ${ARTIFACT_FILE}  artifact.yaml
-#   ${ARTIFACT}=  load_data_from  ${file_path}
-#   ${assets_id}=  Create List
-#   :FOR  ${asset_id}  IN  @{ARTIFACT.assets_id}
-#   \  Run Keyword If  '${MODE}'=='assets'  Run Keyword And Ignore Error  Append To List  ${assets_id}  ${asset_id}
-#   Log  ${assets_id}
-#   Run Keyword If  '${MODE}'=='assets'  Append To List  ${assets_id}
-#   ...          ${USERS.users['${tender_owner}'].tender_data.data.id}
-#   Log  ${assets_id}
-#   ${artifact}=  Create Dictionary
-#   ...      api_version=${api_version}
-#   ...      tender_uaid=${TENDER['TENDER_UAID']}
-#   ...      mode=${MODE}
-#   Run Keyword If  '${MODE}'=='assets'  Set To Dictionary  ${artifact}
-#   ...  assets_id=${assets_id}
-#   ...  asset_access_token=${USERS.users['${tender_owner}'].access_token}
-#   ...  ELSE IF  '${MODE}'=='lots'  Set To Dictionary  ${artifact}
-#       ...          lot_uaid=${USERS.users['${tender_owner}'].tender_data.data.lotID}
-#       ...          lot_id=${USERS.users['${tender_owner}'].tender_data.data.id}
-#       ...          lotIdentifier=${USERS.users['${tender_owner}'].tender_data.data.lotIdentifier}
-#       ...          tender_owner_access_token=${USERS.users['${tender_owner}'].access_token}
-#   ...  ELSE  Set To Dictionary  ${artifact}  lot_id=''    assets_id=''    last_modification_date=${TENDER['LAST_MODIFICATION_DATE']}
-#   Run Keyword And Ignore Error  Set To Dictionary  ${artifact}
-#   ...          tender_owner=${USERS.users['${tender_owner}'].broker}
-#   ...          access_token=${USERS.users['${tender_owner}'].access_token}
-#   ...          tender_id=${USERS.users['${tender_owner}'].tender_data.data.id}
-#   Run Keyword And Ignore Error  Set To Dictionary  ${artifact}  tender_owner_access_token=${USERS.users['${tender_owner}'].access_token}
-#   Run Keyword And Ignore Error  Set To Dictionary  ${artifact}  provider_access_token=${USERS.users['${provider}'].access_token}
-#   Run Keyword And Ignore Error  Set To Dictionary  ${artifact}  provider1_access_token=${USERS.users['${provider1}'].access_token}
-#   Run Keyword And Ignore Error  Set To Dictionary  ${artifact}  provider_bid_id=${USERS.users['${provider}'].bid_id}
-#   Run Keyword And Ignore Error  Set To Dictionary  ${artifact}  provider1_bid_id=${USERS.users['${provider1}'].bid_id}
-#   Log   ${artifact}
-#   log_object_data  ${artifact}  file_name=artifact  update=${True}  artifact=${True}
-
-
-
 Створити артефакт
   ${artifact}=  Create Dictionary
   ...      api_version=${api_version}
   ...      tender_uaid=${TENDER['TENDER_UAID']}
+  ...      last_modification_date=${TENDER['LAST_MODIFICATION_DATE']}
   ...      mode=${MODE}
   Run Keyword If  '${MODE}'=='assets'  Set To Dictionary  ${artifact}
   ...  assets_id=${USERS.users['${tender_owner}'].tender_data.data.id}
   ...  asset_access_token=${USERS.users['${tender_owner}'].access_token}
+  ...  asset_uaid=${USERS.users['${tender_owner}'].tender_data.data.assetID}
   ...  ELSE IF  '${MODE}'=='lots'  Set To Dictionary  ${artifact}
       ...          lot_uaid=${USERS.users['${tender_owner}'].tender_data.data.lotID}
       ...          lot_id=${USERS.users['${tender_owner}'].tender_data.data.id}
@@ -290,7 +232,6 @@ Get Broker Property By Username
   :FOR  ${index}  IN  0  1
   \  ${auction}=  test_lot_auctions_data  ${USERS.users['${tender_owner}'].tender_data.data.auctions[${index}]}  ${index}
   \  Run As  ${tender_owner}  Додати умови проведення аукціону  ${auction}
-  # \  Set To Dictionary  ${USERS.users['${tender_owner}']}  initial_auction[${index}]_data=${adapted_data}
 
 
 Підготувати дані для запитання
@@ -618,7 +559,6 @@ Log differences between dicts
   [Arguments]  ${username}  ${field_name}  ${object_id}
   ${object_type}=  get_object_type_by_id  ${object_id}
   ${objects}=  Get Variable Value  ${USERS.users['${username}'].tender_data.data['${object_type}']}  ${None}
-  Log  ${objects}
   ${object_index}=  get_object_index_by_id  ${objects}  ${object_id}
   [return]  ${object_type}[${object_index}].${field_name}
 

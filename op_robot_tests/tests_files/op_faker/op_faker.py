@@ -108,8 +108,7 @@ class OP_Provider(BaseProvider):
     @classmethod
     def scheme_other(self, scheme_id=None):
         schemes= self.schemes_other
-        if scheme_id:
-            schemes.remove(scheme_id)
+        if scheme_id: schemes.remove(scheme_id)
         return self.random_element(schemes)
 
     @classmethod

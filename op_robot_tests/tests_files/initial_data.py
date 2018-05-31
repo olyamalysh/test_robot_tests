@@ -58,11 +58,15 @@ def create_fake_dgfID():
 
 
 def create_fake_decisionDate():
-    return (get_now() + timedelta(days=-2)).isoformat()
+    return (get_now() - timedelta(days=2)).isoformat()
 
 
 def create_fake_decisionID():
     return fake.dgfDecisionID()
+
+
+def create_fake_date():
+    return (get_now() + timedelta(days=2)).isoformat()
 
 
 def convert_days_to_seconds(days, accelerator):
@@ -250,7 +254,7 @@ def test_asset_data(params):
     for i in range(params['number_of_items']):
         new_item = test_item_data(scheme_group)
         new_item["registrationDetails"]= {
-            "status": 'registering'
+            "status": 'complete'
     }
         test_asset_data['items'].append(new_item)
     return munchify(test_asset_data)
@@ -259,10 +263,10 @@ def test_asset_data(params):
 def test_lot_data(assets_id, params):
     lot_data = {
         "assets": assets_id,
-        "lotType": "loki",
+        "lotType": "yoke",
         "decisions": [{
-            "decisionDate": (get_now() + timedelta(days=-2)).isoformat(),
-            "decisionID": fake.dgfDecisionID()
+            "decisionDate": create_fake_decisionDate(),
+            "decisionID": create_fake_decisionID()
         }],
         "mode": "test"
     }
@@ -292,7 +296,7 @@ def test_lot_auctions_data(lot_data, index):
                 "currency": u"UAH"
             },
             "auctionPeriod": {
-                "startDate": (get_now() + timedelta(days=2)).isoformat()
+                "startDate": create_fake_date()
             }
         })
     else:

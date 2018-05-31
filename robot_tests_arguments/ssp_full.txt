@@ -16,3 +16,8 @@
 -i find_lot
 -i lot_view
 -i modify_lot
+-i modify_auction
+-i modify_auction_value
+-i modify_auction_step
+-i modify_auction_guarantee
+-i modify_auction_registrationFee

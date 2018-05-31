@@ -198,23 +198,6 @@ Library  openprocurement_client.utils
   [return]   ${tender}
 
 
-# Видалити актив
-#   [Arguments]  ${username}  ${tender_uaid}  ${status}
-#   ${tender}=   Call Method  ${USERS.users['${username}'].asset_client}  get_tender  ${tender_uaid}
-#   ${tender}=  set_access_key  ${tender}  ${USERS.users['${username}'].asset_access_token}
-#   Set_To_Object  ${tender.data}  status  ${status}
-#   Log  ${tender}
-#   Call Method  ${USERS.users['${username}'].asset_client}  patch_tender  ${tender}
-
-
-# Звірити статус актива
-#   [Arguments]  ${username}  ${assetid}  ${status}
-#   ${tender}=   Call Method  ${USERS.users['${username}'].asset_client}  get_tender  ${assetid}
-#   Log  ${tender}
-#   Порівняти об'єкти  ${status}  ${tender.data.status}
-#   [return]   ${tender}
-
-
 Оновити сторінку з тендером
   [Arguments]  ${username}  ${tender_uaid}
   openprocurement_client.Пошук тендера по ідентифікатору  ${username}  ${tender_uaid}
@@ -658,7 +641,6 @@ Library  openprocurement_client.utils
   Log  ${reply}
   [return]  ${reply}
 
-
 ##############################################################################
 #             Assets operations
 ##############################################################################
@@ -792,6 +774,33 @@ Library  openprocurement_client.utils
 Завантажити документ в лот з типом
   [Arguments]  ${username}  ${tender_uaid}  ${filepath}  ${documentType}
   openprocurement_client.Завантажити документ в тендер з типом  ${username}  ${tender_uaid}  ${filepath}  ${documentType}
+
+
+Завантажити документ в умови проведення аукціону
+  [Arguments]  ${username}  ${tender_uaid}  ${filepath}  ${documentType}  ${auction_index}
+  Log  ${username}
+  Log  ${tender_uaid}
+  Log  ${filepath}
+  ${tender}=  openprocurement_client.Пошук тендера по ідентифікатору  ${username}  ${tender_uaid}
+  ${tender}=  set_access_key  ${tender}  ${USERS.users['${username}'].access_token}
+  ${auction_id}=  Get Variable Value  ${tender.data.auctions[${auction_index}].id}
+  ${reply}=  Call Method  ${USERS.users['${username}'].client}  upload_auction_document  ${filepath}  ${tender}  ${auction_id}  ${documentType}
+  Log object data  ${reply}  reply
+  [return]  ${reply}
+
+
+Внести зміни в умови проведення аукціону
+  [Arguments]  ${username}  ${tender_uaid}  ${fieldname}  ${fieldvalue}  ${auction_index}
+  ${tender}=  openprocurement_client.Пошук тендера по ідентифікатору  ${username}  ${tender_uaid}
+  ${tender}=  set_access_key  ${tender}  ${USERS.users['${username}'].access_token}
+  ${prev_value} =  Отримати дані із тендера  ${username}  ${tender_uaid}  auctions[${auction_index}].${fieldname}
+  ${auction}=  Get Variable Value  ${tender.data.auctions[${auction_index}]}
+  Set_To_Object  ${auction}   ${fieldname}   ${fieldvalue}
+  ${auction}=  Create Dictionary  data=${auction}
+  ${tender}=  Call Method  ${USERS.users['${username}'].client}  patch_auction  ${tender}  ${auction}
+  Log  ${tender}
+  Run Keyword And Expect Error  *  Порівняти об'єкти  ${prev_value}  ${tender.data.auctions[${auction_index}].${fieldname}}
+  Set_To_Object   ${USERS.users['${username}'].tender_data}  auctions[${auction_index}].${fieldname}   ${fieldvalue}
 
 
 Завантажити документ для видалення лоту
