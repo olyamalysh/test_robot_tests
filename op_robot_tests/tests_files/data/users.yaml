@@ -1982,15 +1982,15 @@ users:
         size:     [1366, 800]
     eauction_Owner:
         broker:   eauction
-        homepage: "http://eauction.byustudio.in.ua"
-        login:    formyqatestin.g@gmail.com
+        homepage: "http://eauction-dev.byustudio.in.ua"
+        login:    primatization@aditus.info
         password: andriy85
         browser:  Chrome
         position: [0, 0]
         size:     [1366, 5000]
     eauction_Provider:
         broker:   eauction
-        homepage: "http://eauction.byustudio.in.ua"
+        homepage: "http://eauction-dev.byustudio.in.ua"
         login:    uaceseller1@mail.ru
         password: andriy85
         browser:  Chrome
@@ -1998,7 +1998,7 @@ users:
         size:     [1366, 5000]
     eauction_Provider1:
         broker:   eauction
-        homepage: "http://eauction.byustudio.in.ua"
+        homepage: "http://eauction-dev.byustudio.in.ua"
         login:    uaceseller2@mail.ru
         password: andriy85
         browser:  Chrome
@@ -2006,7 +2006,7 @@ users:
         size:     [1366, 5000]
     eauction_Viewer:
         broker:   eauction
-        homepage: "http://eauction.byustudio.in.ua"
+        homepage: "http://eauction-dev.byustudio.in.ua"
         password: andriy85
         browser:  Chrome
         position: [0, 0]
