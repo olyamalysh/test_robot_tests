@@ -722,7 +722,10 @@ Library  openprocurement_client.utils
 ##############################################################################
 
 Створити лот
-  [Arguments]  ${username}  ${tender_data}
+  [Arguments]  ${username}  ${tender_data}  ${ASSET_UAID}
+  Call Method  ${USERS.users['${username}'].asset_client}  get_tenders
+  ${asset_id}=  Wait Until Keyword Succeeds  5x  30 sec  get_tender_id_by_uaid  ${ASSET_UAID}  ${USERS.users['${username}'].asset_client}  id_field=assetID
+  ${tender_data}=  update_lot_data  ${tender_data}  ${asset_id}
   ${ID}=  openprocurement_client.Створити тендер  ${username}  ${tender_data}
   [return]  ${ID}
 
@@ -758,7 +761,7 @@ Library  openprocurement_client.utils
 
 Отримати інформацію з активу лоту
   [Arguments]  ${username}  ${tender_uaid}  ${item_id}  ${field_name}
-  ${field_value}=  Отримати інформацію із предмету  ${username}  ${tender_uaid}  ${item_id}  ${field_name}
+  ${field_value}=  openprocurement_client.Отримати інформацію із предмету  ${username}  ${tender_uaid}  ${item_id}  ${field_name}
   [return]  ${field_value}
 
 
