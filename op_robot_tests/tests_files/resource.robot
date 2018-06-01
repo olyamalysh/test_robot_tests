@@ -1,9 +1,7 @@
 *** Variables ***
-${RESOURCE}      tenders   # possible values: tenders, auctions
-${API_HOST_URL}  https://lb.api-sandbox.openprocurement.org
-${API_VERSION}   2.3
-${BROKER}        Quinta
-${DS_HOST_URL}   https://upload.docs-sandbox.openprocurement.org
-${ROLE}          viewer
-${EDR_HOST_URL}  https://lb.edr-sandbox.openprocurement.org
-${EDR_VERSION}   0
+${resource}      auctions   # possible values: tenders, auctions
+${api_host_url}  https://lb.api-sandbox.ea2.openprocurement.net
+${api_version}   2.3
+${broker}        Quinta
+${ds_host_url}   https://upload.docs-sandbox.ea2.openprocurement.net
+${role}          viewer

@@ -4,8 +4,9 @@ from .local_time import get_now, TZ
 from copy import deepcopy
 from datetime import timedelta
 from dateutil.parser import parse
-from dpath.util import delete as xpathdelete, get as xpathget, new as xpathnew
+from dpath.util import new as xpathnew
 from haversine import haversine
+from iso8601 import parse_date
 from json import load, loads
 from jsonpath_rw import parse as parse_path
 from munch import Munch, munchify
@@ -13,61 +14,56 @@ from robot.errors import ExecutionFailed
 from robot.libraries.BuiltIn import BuiltIn
 from robot.output import LOGGER
 from robot.output.loggerhelper import Message
+from time import sleep
 # These imports are not pointless. Robot's resource and testsuite files
 # can access them by simply importing library "service_keywords".
 # Please ignore the warning given by Flake8 or other linter.
 from .initial_data import (
-    create_fake_doc,
-    create_fake_sentence,
     create_fake_amount,
-    create_fake_number,
-    create_fake_date,
-    create_fake_funder,
-    get_fake_funder_scheme,
+    create_fake_value,
+    create_fake_cancellation_reason,
+    create_fake_doc,
+    create_fake_guarantee,
+    create_fake_image,
+    create_fake_minimal_step,
+    create_fake_sentence,
+    create_fake_url,
     fake,
-    subtraction,
-    field_with_id,
     test_bid_data,
     test_bid_value,
-    test_change_data,
-    test_claim_answer_data,
-    test_claim_data,
-    test_complaint_data,
-    test_complaint_reply_data,
     test_confirm_data,
-    test_feature_data,
-    test_invalid_features_data,
     test_item_data,
-    test_lot_data,
-    test_lot_document_data,
     test_related_question,
     test_question_answer_data,
     test_question_data,
     test_supplier_data,
     test_tender_data,
-    test_tender_data_competitive_dialogue,
-    test_tender_data_limited,
-    test_tender_data_openeu,
-    test_tender_data_openua,
-    test_tender_data_planning,
-    test_tender_data_openua_defense,
-    test_bid_competitive_data,
+    test_tender_data_dgf_other,
+    create_fake_tenderAttempts,
+    create_fake_dgfID,
+    create_fake_decisionDate,
+    create_fake_decisionID,
+    create_fake_scheme_id,
+    create_fake_items_quantity,
+    cretate_fake_unit_name,
+    convert_days_to_seconds,
     create_fake_title,
-    create_fake_value_amount,
-    test_change_document_data,
-    convert_amount,
-    get_number_of_minutes,
-    get_hash,
+    create_fake_description,
+    create_fake_item_description,
+    test_asset_data,
+    test_lot_data,
+    test_lot_auctions_data,
+    create_fake_date,
+    update_lot_data,
+
 )
 from barbecue import chef
 from restkit import request
-# End of non-pointless import
+# End of non-pointless imports
 import os
 import re
 
-
 NUM_TYPES = (int, long, float)
-STR_TYPES = (str, unicode)
 
 
 def get_current_tzdate():
@@ -156,6 +152,40 @@ def compare_coordinates(left_lat, left_lon, right_lat, right_lon, accuracy=0.1):
     if distance > accuracy:
         return False
     return True
+
+
+def compare_tender_attempts(left, right):
+    if isinstance(right, int):
+        if left == right:
+            return True
+        raise ValueError(u"Objects are not equal")
+    elif isinstance(right, basestring):
+        left = convert_tender_attempts(left)
+        if left == right:
+            return True
+        raise ValueError(u"Objects are not equal")
+    raise ValueError(u"Incorrect object types")
+
+
+def compare_additionalClassifications_description(right):
+    if right in (u"Оренда", u"Найм"):
+        return True
+    raise ValueError(u"Objects are not equal")
+
+
+def convert_tender_attempts(attempts):
+    if attempts == 1:
+        return u"Лот виставляється вперше"
+    elif attempts in [2, 3, 4, ]:
+        return u"Лот виставляється повторно"
+    raise ValueError(u"Cannot convert attempts")
+
+
+def compare_periods_duration(left, right, seconds):
+    left = parse(left)
+    right = parse(right)
+    delta = (right - left).total_seconds()
+    return delta >= seconds
 
 
 def log_object_data(data, file_name=None, format="yaml", update=False, artifact=False):
@@ -279,7 +309,7 @@ def compute_intrs(brokers_data, used_brokers):
                 if k not in l.keys():
                     l[k] = v
                 elif k in keys_to_prefer_lesser:
-                   l[k] = recur(l[k], v, prefer_greater_numbers=False)
+                    l[k] = recur(l[k], v, prefer_greater_numbers=False)
                 else:
                     l[k] = recur(l[k], v)
             return l
@@ -296,11 +326,7 @@ def compute_intrs(brokers_data, used_brokers):
     return result
 
 
-def prepare_test_tender_data(procedure_intervals,
-                             tender_parameters,
-                             submissionMethodDetails,
-                             accelerator,
-                             funders):
+def prepare_test_tender_data(procedure_intervals, tender_parameters):
     # Get actual intervals by mode name
     mode = tender_parameters['mode']
     if mode in procedure_intervals:
@@ -316,32 +342,12 @@ def prepare_test_tender_data(procedure_intervals,
         "not '{}'".format(type(intervals['accelerator']).__name__)
     assert intervals['accelerator'] >= 0, \
         "Accelerator should not be less than 0"
-    if mode == 'negotiation':
-        return munchify({'data': test_tender_data_limited(tender_parameters)})
-    elif mode == 'negotiation.quick':
-        return munchify({'data': test_tender_data_limited(tender_parameters)})
-    elif mode == 'openeu':
-        return munchify({'data': test_tender_data_openeu(
-            tender_parameters, submissionMethodDetails)})
-    elif mode == 'openua':
-        return munchify({'data': test_tender_data_openua(
-            tender_parameters, submissionMethodDetails)})
-    elif mode == 'openua_defense':
-        return munchify({'data': test_tender_data_openua_defense(
-            tender_parameters, submissionMethodDetails)})
-    elif mode == 'open_competitive_dialogue':
-        return munchify({'data': test_tender_data_competitive_dialogue(
-            tender_parameters, submissionMethodDetails)})
-    elif mode == 'reporting':
-        return munchify({'data': test_tender_data_limited(tender_parameters)})
-    elif mode == 'belowThreshold':
-        return munchify({'data': test_tender_data(
-            tender_parameters,
-            submissionMethodDetails=submissionMethodDetails,
-            funders=funders,
-            accelerator=accelerator)})
-        # The previous line needs an explicit keyword argument because,
-        # unlike previous functions, this one has three arguments.
+    if mode == 'dgfOtherAssets':
+        return munchify({'data': test_tender_data_dgf_other(tender_parameters)})
+    if mode == 'assets':
+        return munchify({'data': test_asset_data(tender_parameters)})
+    if mode == 'lots':
+        return munchify({'data': test_lot_data(tender_parameters)})
     raise ValueError("Invalid mode for prepare_test_tender_data")
 
 
@@ -382,7 +388,7 @@ def get_from_object(obj, attribute):
 def set_to_object(obj, attribute, value):
     # Search the list index in path to value
     list_index = re.search('\d+', attribute)
-    if list_index and attribute != 'stage2TenderID':
+    if list_index:
         list_index = list_index.group(0)
         parent, child = attribute.split('[' + list_index + '].')[:2]
         # Split attribute to path to lits (parent) and path to value in list element (child)
@@ -414,6 +420,16 @@ def wait_to_date(date_stamp):
     if wait_seconds < 0:
         return 0
     return wait_seconds
+
+
+def wait_and_write_to_console(date):
+    time = wait_to_date(date)
+    if time > 0:
+        minutes, seconds = divmod(time, 60)
+        for number in xrange(int(minutes)):
+            sleep(60)
+            print('.')
+        sleep(seconds)
 
 
 def merge_dicts(a, b):
@@ -463,24 +479,13 @@ def get_id_from_object(obj):
     return obj_id.group(1)
 
 
-def get_id_from_string(string):
-    return re.match(r'[dc]\-[0-9a-fA-F]{8}', string).group(0)
+def get_id_from_doc_name(name):
+    return re.match(r'd\-[0-9a-fA-F]{8}', name).group(0)
 
 
 def get_object_type_by_id(object_id):
     prefixes = {'q': 'questions', 'f': 'features', 'i': 'items', 'l': 'lots'}
     return prefixes.get(object_id[0])
-
-
-def get_complaint_index_by_complaintID(data, complaintID):
-    if not data:
-        return 0
-    for index, element in enumerate(data):
-        if element['complaintID'] == complaintID:
-            break
-    else:
-        index += 1
-    return index
 
 
 def get_object_index_by_id(data, object_id):
@@ -495,59 +500,18 @@ def get_object_index_by_id(data, object_id):
     return index
 
 
-def get_object_by_id(data, given_object_id, slice_element, object_id):
-    """
-        data: object to slice
-        given_object_id: with what id we should compare
-        slice_element: what path should be extracted (e.g. from { key: val } extract key )
-        object_id: what property is id (e.g. from { id: 1, name: 2 } extract id)
-    """
-
-    # Slice the given object, e.g. slice bid object to lotValues object
-    try:
-        sliced_object = data[slice_element]
-    except KeyError:
-        return data
-
-    # If there is one sliced object, get the 1st element
-    if len(sliced_object) == 1:
-        return sliced_object[0]
-
-    # Compare given object id and id from sliced object
-    for index, element in enumerate(sliced_object):
-        element_id = element[object_id]
-        if element_id == given_object_id:
-            return element
-
-    return sliced_object[0]
-
-
 def generate_test_bid_data(tender_data):
-    if tender_data.get('procurementMethodType', '') in (
-            'aboveThresholdUA',
-            'aboveThresholdUA.defense',
-            'aboveThresholdEU',
-            'competitiveDialogueUA',
-            'competitiveDialogueEU'
-        ):
-        bid = test_bid_competitive_data()
-        bid.data.selfEligible = True
-        bid.data.selfQualified = True
-    else:
-        bid = test_bid_data()
+    bid = test_bid_data()
     if 'lots' in tender_data:
         bid.data.lotValues = []
         for lot in tender_data['lots']:
-            value = test_bid_value(lot['value']['amount'])
+            value = test_bid_value(lot['value']['amount'], lot['minimalStep']['amount'])
             value['relatedLot'] = lot.get('id', '')
             bid.data.lotValues.append(value)
     else:
-        bid.data.update(test_bid_value(tender_data['value']['amount']))
-    if 'features' in tender_data:
-        bid.data.parameters = []
-        for feature in tender_data['features']:
-            parameter = {"value": fake.random_element(elements=(0.05, 0.01, 0)), "code": feature.get('code', '')}
-            bid.data.parameters.append(parameter)
+        bid.data.update(test_bid_value(tender_data['value']['amount'], tender_data['minimalStep']['amount']))
+    if 'dgfOtherAssets' in tender_data.get('procurementMethodType', ''):
+        bid.data.qualified = True
     return bid
 
 
@@ -555,53 +519,52 @@ def mult_and_round(*args, **kwargs):
     return round(reduce(operator.mul, args), kwargs.get('precision', 2))
 
 
-def generate_test_bid_data_second_stage(tender_data, index='0'):
-    bid = test_bid_data()
-    if index.isdigit():
-        index = int(index)
-    else:
-        index = 0
-    bid['data']['tenderers'][0]['identifier']['id'] = tender_data['shortlistedFirms'][index]['identifier']['id']
-    bid['data']['tenderers'][0]['identifier']['scheme'] = tender_data['shortlistedFirms'][index]['identifier']['scheme']
-    bid['data']['tenderers'][0]['identifier']['legalName'] = tender_data['shortlistedFirms'][index]['identifier']['legalName']
-    bid['data']['tenderers'][0]['name'] = tender_data['shortlistedFirms'][index]['name']
-    if tender_data.get('procurementMethodType', '') in ('competitiveDialogueEU.stage2', 'competitiveDialogueUA.stage2'):
-        bid.data.selfEligible = True
-        bid.data.selfQualified = True
-    if 'lots' in tender_data:
-        bid.data.lotValues = []
-        for lot in tender_data['lots']:
-            value = test_bid_value(lot['value']['amount'])
-            value['relatedLot'] = lot.get('id', '')
-            bid.data.lotValues.append(value)
-    else:
-        bid.data.update(test_bid_value(tender_data['value']['amount']))
-    if 'features' in tender_data:
-        bid.data.parameters = []
-        for feature in tender_data['features']:
-            parameter = {"value": fake.random_element(elements=(0.05, 0.01, 0)), "code": feature.get('code', '')}
-            bid.data.parameters.append(parameter)
-    return bid
+# GUI Frontends common
+def add_data_for_gui_frontends(tender_data):
+    now = get_now()
+    # tender_data.data.enquiryPeriod['startDate'] = (now + timedelta(minutes=2)).isoformat()
+    tender_data.data.enquiryPeriod['endDate'] = (now + timedelta(minutes=6)).isoformat()
+    tender_data.data.tenderPeriod['startDate'] = (now + timedelta(minutes=7)).isoformat()
+    tender_data.data.tenderPeriod['endDate'] = (now + timedelta(minutes=11)).isoformat()
+    return tender_data
+
+
+def convert_date_to_slash_format(isodate):
+    iso_dt = parse_date(isodate)
+    date_string = iso_dt.strftime("%d/%m/%Y")
+    return date_string
+
+
+def convert_datetime_to_dot_format(isodate):
+    iso_dt = parse_date(isodate)
+    day_string = iso_dt.strftime("%d.%m.%Y %H:%M")
+    return day_string
+
+
+def local_path_to_file(file_name):
+    return os.path.join(os.path.dirname(__file__), 'documents', file_name)
+
+
+def compare_scheme_groups(length, *items):
+    # Checks scheme groups of *items
+    # Arguments: length - number of items
+    #            *items - list of items
+    # Return True, if all items have different scheme groups, and
+    # return False, if at least two items have same scheme group.
+    for i in range(length):
+        i_classification = items[i].get('classification', '')
+        i_scheme_group = i_classification.get('id', '')
+        for j in range(length):
+            j_classification = items[j].get('classification', '')
+            j_scheme_group = j_classification.get('id', '')
+            if(i_scheme_group == j_scheme_group and i != j):
+                return False
+    return True
 
 
 def convert_amount_string_to_float(amount_string):
-    return float(amount_string.replace(' ', '').replace(',', '.'))
+    return float(amount_string.replace(' ', '').replace(',', '.').replace("'",''))
 
 
-def compare_rationale_types(type1, type2):
-    return set(type1) == set(type2)
-
-
-def delete_from_dictionary(variable, path):
-    if not type(path) in STR_TYPES:
-        raise TypeError('path must be one of: ' +
-            str([x.__name__ for x in STR_TYPES]))
-    return xpathdelete(variable, path, separator='.')
-
-
-def dictionary_should_not_contain_path(dictionary, path):
-    try:
-        xpathget(dictionary, path, separator='.')
-    except KeyError:
-        return
-    raise RuntimeError("Dictionary contains path '%s'." % path)
+def get_length_of_item(data, key):
+    return len(data.get(key, []))

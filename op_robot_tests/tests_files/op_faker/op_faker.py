@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from faker.providers import BaseProvider
-from faker.generator import random
 from copy import deepcopy
 from munch import Munch
 from json import load
@@ -18,16 +17,15 @@ def load_data_from_file(file_name):
 
 
 class OP_Provider(BaseProvider):
-    _fake_data = load_data_from_file("op_faker_data.json")
-    word_list = _fake_data.words
-    procuringEntities = _fake_data.procuringEntities
-    funders = _fake_data.funders
-    funders_scheme_list = _fake_data.funders_scheme
-    addresses = _fake_data.addresses
-    classifications = _fake_data.classifications
-    cpvs = _fake_data.cpvs
-    items_base_data = _fake_data.items_base_data
-    rationale_types = _fake_data.rationale_types
+    __fake_data = load_data_from_file("op_faker_data.json")
+    word_list = __fake_data.words
+    procuringEntities = __fake_data.procuringEntities
+    procuringEntities_other = __fake_data.procuringEntities_other
+    addresses = __fake_data.addresses
+    classifications_other = __fake_data.classifications_other
+    schemes_other = __fake_data.schemes_other
+    items_base_data_other = __fake_data.items_base_data_other
+    additionalIdentifiers = __fake_data.additionalIdentifiers
 
     @classmethod
     def randomize_nb_elements(self, number=10, le=60, ge=140):
@@ -85,6 +83,15 @@ class OP_Provider(BaseProvider):
         return self.sentence(nb_words=3)
 
     @classmethod
+    def dgfID(self):
+        return "{}{}-{:05d}".format("F", self.random_int(10000000, 99999999),
+                                    self.random_int(1000, 99999))
+
+    @classmethod
+    def dgfDecisionID(self):
+        return "{}-{}".format(self.random_int(1000, 9999), self.random_int(1, 9))
+
+    @classmethod
     def description(self):
         return self.sentence(nb_words=10)
 
@@ -93,88 +100,56 @@ class OP_Provider(BaseProvider):
         return deepcopy(self.random_element(self.procuringEntities))
 
     @classmethod
-    def funders_data(self):
-        return self.random_element(self.funders)
+    def procuringEntity_other(self):
+        procuringEntities = deepcopy(self.procuringEntities)
+        procuringEntities.extend(self.procuringEntities_other)
+        return deepcopy(self.random_element(procuringEntities))
 
     @classmethod
-    def funder_scheme(self):
-        return self.random_element(self.funders_scheme_list)
+    def scheme_other(self, scheme_id=None):
+        schemes= self.schemes_other
+        if scheme_id: schemes.remove(scheme_id)
+        return self.random_element(schemes)
 
     @classmethod
-    def cpv(self, cpv_group=None):
-        if cpv_group:
-            cpvs = []
-            for cpv_element in self.cpvs:
-                if cpv_element.startswith(cpv_group):
-                    cpvs.append(cpv_element)
-            return self.random_element(cpvs)
-        else:
-            return self.random_element(self.cpvs)
+    def additionalIdentifier(self):
+        return self.random_element(self.additionalIdentifiers)
 
     @classmethod
-    def fake_item(self, cpv_group=None):
-        """
-        Generate a random item for openprocurement tenders
+    def fake_item(self, scheme_group):
+        # """
+        # Generate a random item for openprocurement tenders
 
-        :param cpv_group: gives possibility to generate items
-            from a specific cpv group. Cpv group is three digits
-            in the beginning of each cpv id.
-        """
-        item_base_data = None
-        if cpv_group is None:
-            item_base_data = self.random_element(self.items_base_data)
-        else:
-            cpv_group = str(cpv_group)
-            similar_cpvs = []
-            for cpv_element in self.cpvs:
-                if cpv_element.startswith(cpv_group):
-                    similar_cpvs.append(cpv_element)
-            cpv = self.random_element(similar_cpvs)
-            for entity in self.items_base_data:
-                if entity["cpv_id"] == cpv:
-                    item_base_data = entity
-                    break
-            if not item_base_data:
-                raise ValueError('unable to find an item with CPV ' + cpv)
+        # :param scheme_group: gives possibility to generate items
+        #     from a specific scheme group. scheme group is three digits
+        #     in the beginning of each scheme id.
+        # """
+        # for dgf other mode, and all other modes besides dgf financial
+        # generates items from dgf_other scheme group
+        scheme_group = str(scheme_group)
+        similar_scheme = []
+        for scheme_element in self.classifications_other:
+            if scheme_element["classification"]["id"].startswith(scheme_group):
+                similar_scheme.append(scheme_element)
+        scheme = self.random_element(similar_scheme)["classification"]["id"]
+        for entity in self.items_base_data_other:
+            if entity["scheme_id"] == scheme:
+                item_base_data = entity
+                break
+        for entity in self.classifications_other:
+            if entity["classification"]["id"] == item_base_data["scheme_id"]:
+                classification = entity
+                break
 
-        # choose appropriate additional classification for item_base_data's cpv
-        additional_class = []
-        for entity in self.classifications:
-            if entity["classification"]["id"] == item_base_data["cpv_id"]:
-                additional_class.append(entity)
-        if not additional_class:
-            raise ValueError('unable to find a matching additional classification for CPV ' + cpv)
-        classification = self.random_element(additional_class)
-
-        dk_descriptions = {
-            u'ДК003': (u'Послуги фахівців', u'Услуги специалистов', u'Specialists services'),
-            u'ДК015': (u'Дослідження та розробки', u'Исследования и разработки', u'Research and development'),
-            u'ДК018': (u'Будівлі та споруди', u'Здания и сооружения', u'Buildings and structures')
-        }
         address = self.random_element(self.addresses)
         item = {
+            "description": item_base_data["description"],
+            "description_ru": item_base_data["description_ru"],
+            "description_en": item_base_data["description_en"],
             "classification": classification["classification"],
-            "deliveryAddress": address["deliveryAddress"],
-            "deliveryLocation": address["deliveryLocation"],
+            "additionalClassifications": classification["additionalClassifications"],
+            "address": address["deliveryAddress"],
             "unit": item_base_data["unit"],
             "quantity": self.randomize_nb_elements(number=item_base_data["quantity"], le=80, ge=120)
         }
-        if item_base_data["cpv_id"] == "99999999-9":
-            scheme = classification["additionalClassifications"][0]["scheme"]
-            item.update({
-                "description": dk_descriptions[scheme][0],
-                "description_ru": dk_descriptions[scheme][1],
-                "description_en": dk_descriptions[scheme][2]
-            })
-        else:
-            item.update({
-                "additionalClassifications": classification["additionalClassifications"],
-                "description": item_base_data["description"],
-                "description_ru": item_base_data["description_ru"],
-                "description_en": item_base_data["description_en"]
-            })
         return deepcopy(item)
-
-    @classmethod
-    def rationaleTypes(self, amount=3):
-        return random.sample(self.rationale_types, amount)
