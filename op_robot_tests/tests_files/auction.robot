@@ -1,7 +1,6 @@
 *** Settings ***
-Resource        keywords.robot
-Resource        resource.robot
 Resource        base_keywords.robot
+Resource        resource.robot
 Suite Setup     Test Suite Setup
 Suite Teardown  Test Suite Teardown
 
@@ -11,8 +10,8 @@ Suite Teardown  Test Suite Teardown
 
 
 *** Test Cases ***
-Можливість знайти лот по ідентифікатору
-  [Tags]   ${USERS.users['${viewer}'].broker}: Пошук лоту
+Можливість знайти закупівлю по ідентифікатору
+  [Tags]   ${USERS.users['${viewer}'].broker}: Пошук тендера
   ...      ${USERS.users['${viewer}'].broker}
   ...      find_tender  level1
   Завантажити дані про тендер
@@ -22,12 +21,13 @@ Suite Teardown  Test Suite Teardown
 #             AUCTION
 ##############################################################################################
 
-Відображення закінчення періоду прийому пропозицій лоту
-  [Tags]   ${USERS.users['${viewer}'].broker}: Відображення основних даних аукціону
+Відображення заголовку лотів
+  [Tags]   ${USERS.users['${viewer}'].broker}: Відображення лоту тендера
   ...      viewer
   ...      ${USERS.users['${viewer}'].broker}
-  ...      tender_view  level2
-  Отримати дані із поля tenderPeriod.endDate тендера для користувача ${viewer}
+  ...      lot_view
+  ...      critical
+  Отримати дані із тендера  ${viewer}  ${TENDER['TENDER_UAID']}  title  ${TENDER['LOT_ID']}
 
 
 Відображення дати початку аукціону
@@ -35,10 +35,13 @@ Suite Teardown  Test Suite Teardown
   ...      viewer
   ...      ${USERS.users['${viewer}'].broker}
   ...      tender_view  level2
-  [Setup]  Дочекатись дати закінчення прийому пропозицій  ${viewer}  ${TENDER['TENDER_UAID']}
+  [Setup]  Отримати дані із тендера   ${viewer}  ${TENDER['TENDER_UAID']}   tenderPeriod.endDate
+  Дочекатись дати закінчення прийому пропозицій  ${viewer}  ${TENDER['TENDER_UAID']}
   Дочекатись дати початку періоду аукціону  ${viewer}  ${TENDER['TENDER_UAID']}
-  Отримати дані із тендера  ${viewer}  ${TENDER['TENDER_UAID']}  auctionPeriod.startDate  ${TENDER['LOT_ID']}
-
+  Run Keyword If  ${NUMBER_OF_LOTS} == 0
+  ...      Отримати дані із тендера  ${viewer}  ${TENDER['TENDER_UAID']}  auctionPeriod.startDate
+  ...      ELSE
+  ...      Отримати дані із тендера  ${viewer}  ${TENDER['TENDER_UAID']}  auctionPeriod.startDate  ${TENDER['LOT_ID']}
 
 Можливість дочекатися початку аукціону
   [Tags]   ${USERS.users['${viewer}'].broker}: Процес аукціону
@@ -69,9 +72,12 @@ Suite Teardown  Test Suite Teardown
   [Tags]   ${USERS.users['${viewer}'].broker}: Відображення основних даних аукціону
   ...      viewer
   ...      ${USERS.users['${viewer}'].broker}
-  ...      auction_end_date
+  ...      tender_view
   [Setup]  Дочекатись синхронізації з майданчиком  ${viewer}
-  Отримати дані із тендера  ${viewer}  ${TENDER['TENDER_UAID']}  auctionPeriod.endDate  ${TENDER['LOT_ID']}
+  Run Keyword If  ${NUMBER_OF_LOTS} == 0
+  ...      Отримати дані із тендера  ${viewer}  ${TENDER['TENDER_UAID']}  auctionPeriod.endDate
+  ...      ELSE
+  ...      Отримати дані із тендера  ${viewer}  ${TENDER['TENDER_UAID']}  auctionPeriod.endDate  ${TENDER['LOT_ID']}
 
 
 *** Keywords ***
@@ -79,8 +85,11 @@ Suite Teardown  Test Suite Teardown
   [Arguments]  ${username}
   # Can't use that dirty hack here since we don't know
   # the date of auction when creating the procurement :)
-  ${auctionStart}=  Отримати дані із тендера   ${username}  ${TENDER['TENDER_UAID']}   auctionPeriod.startDate  ${TENDER['LOT_ID']}
-  wait_and_write_to_console  ${auctionStart}
+  ${auctionStart}=  Run Keyword If  ${NUMBER_OF_LOTS} == 0
+  ...     Отримати дані із тендера   ${username}  ${TENDER['TENDER_UAID']}   auctionPeriod.startDate
+  ...     ELSE
+  ...     Отримати дані із тендера   ${username}  ${TENDER['TENDER_UAID']}   auctionPeriod.startDate  ${TENDER['LOT_ID']}
+  Дочекатись дати  ${auctionStart}
   Оновити LAST_MODIFICATION_DATE
   Дочекатись синхронізації з майданчиком  ${username}
 
@@ -88,7 +97,7 @@ Suite Teardown  Test Suite Teardown
 Можливість вичитати посилання на аукціон для ${username}
   ${url}=  Run As  ${username}  Отримати посилання на аукціон для глядача  ${TENDER['TENDER_UAID']}  ${TENDER['LOT_ID']}
   Should Be True  '${url}'
-  Should Match Regexp  ${url}  ^https?:\/\/sandbox\.ea2\.openprocurement\.auction\/auctions\/([0-9A-Fa-f]{32})
+  Should Match Regexp  ${url}  ^https?:\/\/auction(?:-sandbox)?\.openprocurement\.org\/tenders\/([0-9A-Fa-f]{32})
   Log  URL аукціону для глядача: ${url}
 
 
@@ -99,7 +108,7 @@ Suite Teardown  Test Suite Teardown
 
 Дочекатись дати закінчення аукціону користувачем ${username}
   Відкрити сторінку аукціону для ${username}
-  ${status}  ${_}=  Run Keyword And Ignore Error  Wait Until Keyword Succeeds  75 times  30 s  Page should contain  Аукціон завершився
+  ${status}  ${_}=  Run Keyword And Ignore Error  Wait Until Keyword Succeeds  61 times  30 s  Page should contain  Аукціон завершився
   Run Keyword If  '${status}' == 'FAIL'
   ...      Run Keywords
   ...      Отримати дані із тендера  ${username}  ${TENDER['TENDER_UAID']}  auctionPeriod.startDate  ${TENDER['LOT_ID']}
