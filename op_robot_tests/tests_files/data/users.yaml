@@ -2007,7 +2007,6 @@ users:
     eauction_Viewer:
         broker:   eauction
         homepage: "http://eauction-dev.byustudio.in.ua"
-        password: andriy85
         browser:  Chrome
         position: [0, 0]
         size:     [1366, 5000]
