@@ -80,7 +80,7 @@ ${NUMBER_OF_ITEMS}   ${1}
   [Tags]   ${USERS.users['${viewer}'].broker}: Відображення основних даних лоту
   ...      viewer  tender_owner
   ...      ${USERS.users['${viewer}'].broker}  ${USERS.users['${tender_owner}'].broker}
-  ...      lot_view
+  ...      assetID_view
   Отримати дані із поля assets[0] лоту для усіх користувачів
 
 
@@ -827,4 +827,4 @@ ${NUMBER_OF_ITEMS}   ${1}
   Оновити LAST_MODIFICATION_DATE
   :FOR  ${username}  IN  ${viewer}  ${tender_owner}
   \  Run Keyword And Ignore Error  Remove From Dictionary  ${USERS.users['${username}'].tender_data.data}  status
-  Звірити відображення поля status тендера із pending.deleted для користувача ${viewer}
+  Звірити відображення поля status тендера із pending.deleted для усіх користувачів
