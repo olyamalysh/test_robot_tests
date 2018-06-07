@@ -670,7 +670,7 @@ Library  openprocurement_client.utils
 
 Отримати інформацію з активу об'єкта МП
   [Arguments]  ${username}  ${tender_uaid}  ${item_id}  ${field_name}
-  ${field_value}=  openprocurement_client.Отримати інформацію із предмету  ${username}  ${tender_uaid}  ${item_id}  ${field_name}
+  ${field_value}=  Отримати інформацію із предмету  ${username}  ${tender_uaid}  ${item_id}  ${field_name}
   [return]  ${field_value}
 
 
@@ -773,7 +773,7 @@ Library  openprocurement_client.utils
 
 Отримати інформацію з активу лоту
   [Arguments]  ${username}  ${tender_uaid}  ${item_id}  ${field_name}
-  ${field_value}=  openprocurement_client.Отримати інформацію із предмету  ${username}  ${tender_uaid}  ${item_id}  ${field_name}
+  ${field_value}=  Отримати інформацію із предмету  ${username}  ${tender_uaid}  ${item_id}  ${field_name}
   [return]  ${field_value}
 
 
