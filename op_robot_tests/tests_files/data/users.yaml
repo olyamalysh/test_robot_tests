@@ -133,11 +133,11 @@ users:
     uace_Owner_auction:
         broker:   uaceauction
         homepage: "http://test-eauction.uace.com.ua"
-        login:    dzotenderowner@gmail.com
+        login:    testprozorroyowner@gmail.com
         password: 123456
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1920, 1080]
     uace_Provider_auction:
         broker:   uaceauction
         homepage: "http://test-eauction.uace.com.ua"
@@ -157,9 +157,9 @@ users:
     uace_Viewer_auction:
         broker:   uaceauction
         homepage: "http://test-eauction.uace.com.ua"
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1920, 1080]
     opentender_Owner_auction:
         broker:   opentenderauction
         homepage: "http://test-eauction.open-tender.com.ua"
