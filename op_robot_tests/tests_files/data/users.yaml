@@ -223,9 +223,9 @@ users:
     aukzionua_Owner:
         broker:   aukzionua
         homepage: "http://test.neb.org.ua"
-        login:    dzotenderowner@gmail.com
+        login:    testprozorroyowner@gmail.com
         password: 123456
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     aukzionua_Provider:
@@ -247,7 +247,7 @@ users:
     aukzionua_Viewer:
         broker:   aukzionua
         homepage: "http://test.neb.org.ua"
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     capitalua_Owner:

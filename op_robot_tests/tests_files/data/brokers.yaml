@@ -151,7 +151,7 @@ aukzionua:
         provider:   aukzionua_Provider
         provider1:   aukzionua_Provider1
         viewer:   aukzionua_Viewer
-    timeout_on_wait: 180
+    timeout_on_wait: 360
 capitalua:
     intervals:
         default:
