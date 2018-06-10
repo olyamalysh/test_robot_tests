@@ -193,9 +193,9 @@ users:
     brizol_Owner:
         broker:   brizol
         homepage: "http://test-eauction.brizol.net/login"
-        login:    dzotenderowner@gmail.com
+        login:    testprozorroyowner@gmail.com
         password: 123456
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     brizol_Provider:
@@ -217,7 +217,7 @@ users:
     brizol_Viewer:
         broker:   brizol
         homepage: "http://test-eauction.brizol.net"
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     aukzionua_Owner:

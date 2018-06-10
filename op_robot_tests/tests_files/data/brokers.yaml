@@ -136,7 +136,7 @@ brizol:
         provider:   brizol_Provider
         provider1:   brizol_Provider1
         viewer:   brizol_Viewer
-    timeout_on_wait: 180
+    timeout_on_wait: 360
 aukzionua:
     intervals:
         default:
