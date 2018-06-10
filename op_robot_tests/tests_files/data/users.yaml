@@ -283,9 +283,9 @@ users:
     centrex_Owner:
         broker:   centrex
         homepage: "http://centrex.byustudio.in.ua"
-        login:    dzotenderowner@gmail.com
+        login:    testprozorroyowner@gmail.com
         password: 123456
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     centrex_Provider:
@@ -307,7 +307,7 @@ users:
     centrex_Viewer:
         broker:   centrex
         homepage: "http://centrex.byustudio.in.ua"
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     expagency_Owner:
