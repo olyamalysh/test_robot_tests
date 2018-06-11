@@ -196,7 +196,7 @@ expagency:
         provider:   expagency_Provider
         provider1:   expagency_Provider1
         viewer:   expagency_Viewer
-    timeout_on_wait: 180
+    timeout_on_wait: 360
 govfound:
     intervals:
         default:

@@ -313,9 +313,9 @@ users:
     expagency_Owner:
         broker:   expagency
         homepage: "http://test-torgi.exp-agency.com.ua"
-        login:    dzotenderowner@gmail.com
+        login:    testprozorroyowner@gmail.com
         password: 123456
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     expagency_Provider:
@@ -337,7 +337,7 @@ users:
     expagency_Viewer:
         broker:   expagency
         homepage: "http://test-torgi.exp-agency.com.ua"
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     govfound_Owner:
