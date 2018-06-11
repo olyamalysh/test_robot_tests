@@ -106,7 +106,7 @@ uaceauction:
         provider:       uace_Provider_auction
         provider1:      uace_Provider1_auction
         viewer:         uace_Viewer_auction
-    timeout_on_wait: 360
+    timeout_on_wait: 180
 opentenderauction:
     intervals:
         default:
@@ -121,7 +121,7 @@ opentenderauction:
         provider:       opentender_Provider_auction
         provider1:      opentender_Provider1_auction
         viewer:         opentender_Viewer_auction
-    timeout_on_wait: 360
+    timeout_on_wait: 180
 brizol:
     intervals:
         default:
@@ -136,7 +136,7 @@ brizol:
         provider:   brizol_Provider
         provider1:   brizol_Provider1
         viewer:   brizol_Viewer
-    timeout_on_wait: 360
+    timeout_on_wait: 180
 aukzionua:
     intervals:
         default:
@@ -151,7 +151,7 @@ aukzionua:
         provider:   aukzionua_Provider
         provider1:   aukzionua_Provider1
         viewer:   aukzionua_Viewer
-    timeout_on_wait: 360
+    timeout_on_wait: 180
 capitalua:
     intervals:
         default:
@@ -181,7 +181,7 @@ centrex:
         provider:   centrex_Provider
         provider1:   centrex_Provider1
         viewer:   centrex_Viewer
-    timeout_on_wait: 360
+    timeout_on_wait: 180
 expagency:
     intervals:
         default:
@@ -196,7 +196,7 @@ expagency:
         provider:   expagency_Provider
         provider1:   expagency_Provider1
         viewer:   expagency_Viewer
-    timeout_on_wait: 360
+    timeout_on_wait: 180
 govfound:
     intervals:
         default:
