@@ -343,9 +343,9 @@ users:
     govfound_Owner:
         broker:   govfound
         homepage: "http://test.gov.auction"
-        login:    prozorroytenderowner@gmail.com 
+        login:    testprozorroyowner@gmail.com
         password: 123456
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     govfound_Provider:
@@ -367,7 +367,7 @@ users:
     govfound_Viewer:
         broker:   govfound
         homepage: "http://test.gov.auction"
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     b25h8_Owner_auction:
