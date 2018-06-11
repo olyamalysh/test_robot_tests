@@ -373,9 +373,9 @@ users:
     b25h8_Owner_auction:
         broker:   25h8
         homepage: "http://test.25h8.auction"
-        login:    dzotenderowner@gmail.com
+        login:    testprozorroyowner@gmail.com
         password: 123456
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     b25h8_Provider_auction:
@@ -397,7 +397,7 @@ users:
     b25h8_Viewer_auction:
         broker:   25h8
         homepage: "http://test.25h8.auction"
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     ztv_Owner:
