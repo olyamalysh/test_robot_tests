@@ -104,7 +104,7 @@ users:
         broker:   DZOauctions
         homepage: "http://dz3.byustudio.in.ua"
         login:    testprozorroyowner@gmail.com
-        password: 123456
+        password: 12345678
         browser:  Chrome
         position: [0, 0]
         size:     [1366, 1200]
