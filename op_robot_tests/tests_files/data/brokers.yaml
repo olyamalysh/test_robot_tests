@@ -143,8 +143,8 @@ brizol:
             accelerator: 1440
             auction:  [45, 50]
         lots:
-            accelerator: 144
-            auction:  [120, 130]
+            accelerator: 1
+            auction:  [6000, 6000]
     keywords_file: brizol
     roles:
         tender_owner:   brizol_Owner
@@ -161,8 +161,8 @@ aukzionua:
             accelerator: 1440
             auction:  [65, 70]
         lots:
-            accelerator: 144
-            auction:  [120, 130]
+            accelerator: 1
+            auction:  [6000, 6000]
     keywords_file: aukzionua
     roles:
         tender_owner:   aukzionua_Owner
