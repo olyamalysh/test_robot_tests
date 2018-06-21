@@ -35,6 +35,9 @@ Default:
         dgfOtherAssets:
             accelerator: 1440
             auction:  [25, 30]
+        lots:
+            accelerator: 720
+            auction:  [35, 30]
     # Synchronization delay, in seconds
     timeout_on_wait: 300
 Quinta:
@@ -85,6 +88,9 @@ DZOauctions:
         dgfOtherAssets:
             accelerator: 720
             auction:  [85, 90]
+        lots:
+            accelerator: 720
+            auction:  [35, 30]
     keywords_file: dzo
     roles:
         tender_owner:   DZO_Owner_auction
@@ -100,6 +106,9 @@ uaceauction:
         dgfOtherAssets:
             accelerator: 1440
             auction:  [45, 50]
+        lots:
+            accelerator: 720
+            auction:  [35, 30]
     keywords_file: uace
     roles:
         tender_owner:   uace_Owner_auction
@@ -115,6 +124,9 @@ opentenderauction:
         dgfOtherAssets:
             accelerator: 1440
             auction:  [45, 50]
+        lots:
+            accelerator: 720
+            auction:  [35, 30]
     keywords_file: opentender
     roles:
         tender_owner:   opentender_Owner_auction
@@ -130,6 +142,9 @@ brizol:
         dgfOtherAssets:
             accelerator: 1440
             auction:  [45, 50]
+        lots:
+            accelerator: 720
+            auction:  [35, 30]
     keywords_file: brizol
     roles:
         tender_owner:   brizol_Owner
@@ -145,6 +160,9 @@ aukzionua:
         dgfOtherAssets:
             accelerator: 1440
             auction:  [65, 70]
+        lots:
+            accelerator: 720
+            auction:  [35, 30]
     keywords_file: aukzionua
     roles:
         tender_owner:   aukzionua_Owner
@@ -175,6 +193,9 @@ centrex:
         dgfOtherAssets:
             accelerator: 1440
             auction:  [45, 50]
+        lots:
+            accelerator: 720
+            auction:  [35, 30]
     keywords_file: centrex
     roles:
         tender_owner:   centrex_Owner
@@ -190,6 +211,9 @@ expagency:
         dgfOtherAssets:
             accelerator: 1440
             auction:  [45, 50]
+        lots:
+            accelerator: 720
+            auction:  [35, 30]
     keywords_file: expagency
     roles:
         tender_owner:   expagency_Owner
@@ -205,6 +229,9 @@ govfound:
         dgfOtherAssets:
             accelerator: 1440
             auction:  [45, 50]
+        lots:
+            accelerator: 720
+            auction:  [35, 30]
     keywords_file: govfound
     roles:
         tender_owner:   govfound_Owner
@@ -220,6 +247,9 @@ govfound:
         dgfOtherAssets:
             accelerator: 1440
             auction:  [45, 50]
+        lots:
+            accelerator: 720
+            auction:  [35, 30]
     keywords_file: 25h8
     roles:
         tender_owner:   b25h8_Owner_auction
@@ -941,6 +971,9 @@ eauction:
         dgfOtherAssets:
             accelerator: 1440
             auction:  [100, 105]
+        lots:
+            accelerator: 720
+            auction:  [35, 30]
     keywords_file: eauction
     roles:
         tender_owner:   eauction_Owner
