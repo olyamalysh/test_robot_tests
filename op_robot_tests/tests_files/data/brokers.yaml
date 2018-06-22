@@ -150,7 +150,7 @@ brizol:
             accelerator: 1
         auctions:
             accelerator: 1
-            auction:  [8000, 8000]
+            auction:  [10000, 10000]
     keywords_file: brizol
     roles:
         tender_owner:   brizol_Owner
@@ -170,7 +170,7 @@ aukzionua:
             accelerator: 1
         auctions:
             accelerator: 1
-            auction:  [8000, 8000]
+            auction:  [10000, 10000]
     keywords_file: aukzionua
     roles:
         tender_owner:   aukzionua_Owner
