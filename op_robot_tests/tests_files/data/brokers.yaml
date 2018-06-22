@@ -93,7 +93,7 @@ DZOauctions:
         lots:
             accelerator: 720
         auctions:
-            accelerator: 360
+            accelerator: 144
             auction:  [140, 120]
     keywords_file: dzo
     roles:
