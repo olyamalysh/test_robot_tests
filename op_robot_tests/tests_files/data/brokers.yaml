@@ -90,7 +90,7 @@ DZOauctions:
             auction:  [85, 90]
         lots:
             accelerator: 720
-            auction:  [40, 45]
+            auction:  [120, 120]
     keywords_file: dzo
     roles:
         tender_owner:   DZO_Owner_auction
