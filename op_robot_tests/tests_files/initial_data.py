@@ -189,7 +189,7 @@ def test_tender_data(params, periods=("enquiry", "tender")):
         "value": {
             "amount": value_amount,
             "currency": u"UAH",
-            "valueAddedTaxIncluded": False
+            "valueAddedTaxIncluded": True
         },
         "guarantee": {
             "amount": create_fake_guarantee(value_amount),
@@ -198,7 +198,7 @@ def test_tender_data(params, periods=("enquiry", "tender")):
         "minimalStep": {
             "amount": create_fake_minimal_step(value_amount),
             "currency": u"UAH",
-            "valueAddedTaxIncluded": False
+            "valueAddedTaxIncluded": True
         },
         "items": [],
     }
