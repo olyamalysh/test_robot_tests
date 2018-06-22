@@ -92,6 +92,8 @@ DZOauctions:
             auction:  [85, 90]
         lots:
             accelerator: 720
+        auctions:
+            accelerator: 720
             auction:  [120, 120]
     keywords_file: dzo
     roles:
@@ -146,7 +148,9 @@ brizol:
             auction:  [45, 50]
         lots:
             accelerator: 1
-            auction:  [6000, 6000]
+        auctions:
+            accelerator: 1
+            auction:  [8000, 8000]
     keywords_file: brizol
     roles:
         tender_owner:   brizol_Owner
@@ -164,7 +168,9 @@ aukzionua:
             auction:  [65, 70]
         lots:
             accelerator: 1
-            auction:  [6000, 6000]
+        auctions:
+            accelerator: 1
+            auction:  [8000, 8000]
     keywords_file: aukzionua
     roles:
         tender_owner:   aukzionua_Owner
