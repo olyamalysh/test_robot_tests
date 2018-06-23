@@ -979,9 +979,11 @@ eauction:
         dgfOtherAssets:
             accelerator: 1440
             auction:  [100, 105]
-        lots:
+                lots:
             accelerator: 720
-            auction:  [35, 30]
+        auctions:
+            accelerator: 144
+            auction:  [120, 120]
     keywords_file: eauction
     roles:
         tender_owner:   eauction_Owner
