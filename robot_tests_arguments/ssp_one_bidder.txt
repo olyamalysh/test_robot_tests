@@ -14,4 +14,5 @@
 #-----------procedure-----------#
 -i activate_tender
 -i find_tender
+-i tender_view_tenderPeriod
 -i make_bid_by_provider
