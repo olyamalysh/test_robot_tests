@@ -979,7 +979,7 @@ eauction:
         dgfOtherAssets:
             accelerator: 1440
             auction:  [100, 105]
-                lots:
+        lots:
             accelerator: 720
         auctions:
             accelerator: 144
