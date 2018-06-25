@@ -149,7 +149,7 @@ brizol:
         lots:
             accelerator: 1
         auctions:
-            accelerator: 1
+            accelerator: 1440
             auction:  [15000, 10000]
     keywords_file: brizol
     roles:
