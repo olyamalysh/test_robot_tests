@@ -983,7 +983,7 @@ eauction:
             accelerator: 720
         auctions:
             accelerator: 1440
-            auction:  [60, 60]
+            auction:  [80, 80]
     keywords_file: eauction
     roles:
         tender_owner:   eauction_Owner
