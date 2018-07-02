@@ -980,10 +980,10 @@ eauction:
             accelerator: 1440
             auction:  [100, 105]
         lots:
-            accelerator: 1
+            accelerator: 720
         auctions:
             accelerator: 1440
-            auction:  [15000, 15000]
+            auction:  [60, 60]
     keywords_file: eauction
     roles:
         tender_owner:   eauction_Owner
