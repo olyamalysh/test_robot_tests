@@ -121,7 +121,7 @@ uaceauction:
         provider:       uace_Provider_auction
         provider1:      uace_Provider1_auction
         viewer:         uace_Viewer_auction
-    timeout_on_wait: 150
+    timeout_on_wait: 130
 opentenderauction:
     intervals:
         default:
