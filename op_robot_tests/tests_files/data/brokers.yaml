@@ -113,7 +113,7 @@ uaceauction:
         lots:
             accelerator: 720
         auctions:
-            accelerator: 1000
+            accelerator: 1440
             auction:  [80, 80]
     keywords_file: uace
     roles:
