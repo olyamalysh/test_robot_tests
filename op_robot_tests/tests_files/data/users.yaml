@@ -149,7 +149,7 @@ users:
     uace_Provider1_auction:
         broker:   uaceauction
         homepage: "http://test-eauction.uace.com.ua"
-        login:    prozorroyprovider2@gmail.com
+        login:    testprozorroprovider1@gmail.com
         password: 123456
         browser:  Chrome
         position: [0, 0]
