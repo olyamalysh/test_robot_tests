@@ -39,7 +39,7 @@ Default:
             accelerator: 720
         auctions:
             accelerator: 1440
-            auction:  [100, 30]
+            auction:  [40, 30]
     # Synchronization delay, in seconds
     timeout_on_wait: 300
 Quinta:
@@ -121,7 +121,7 @@ uaceauction:
         provider:       uace_Provider_auction
         provider1:      uace_Provider1_auction
         viewer:         uace_Viewer_auction
-    timeout_on_wait: 90
+    timeout_on_wait: 120
 opentenderauction:
     intervals:
         default:
