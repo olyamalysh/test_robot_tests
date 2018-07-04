@@ -39,7 +39,7 @@ Default:
             accelerator: 720
         auctions:
             accelerator: 1440
-            auction:  [100, 30]
+            auction:  [40, 30]
     # Synchronization delay, in seconds
     timeout_on_wait: 300
 Quinta:
@@ -114,7 +114,7 @@ uaceauction:
             accelerator: 720
         auctions:
             accelerator: 1440
-            auction:  [80, 80]
+            auction:  [60, 60]
     keywords_file: uace
     roles:
         tender_owner:   uace_Owner_auction
