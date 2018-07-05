@@ -142,8 +142,8 @@ ${MODE}  auctions
   ...     ${USERS.users['${provider}'].broker}  ${USERS.users['${provider1}'].broker}
   ...     first_award_active_status
   :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}
-  Run Keyword And Ignore Error  Remove From Dictionary  ${USERS.users['${username}'].tender_data.data.awards[0]}  status
-  Звірити відображення поля awards[0].status тендера із active для усіх користувачів
+  \  Run Keyword And Ignore Error  Remove From Dictionary  ${USERS.users['${username}'].tender_data.data.awards[0]}  status
+  \  Звірити відображення поля awards[0].status тендера із active для усіх користувачів
 
 
 Можливість скасувати рішення кваліфікації другим кандидатом
@@ -229,8 +229,8 @@ ${MODE}  auctions
   ...     ${USERS.users['${provider}'].broker}  ${USERS.users['${provider1}'].broker}
   ...     second_award_pending_status
   :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}
-  Run Keyword And Ignore Error  Remove From Dictionary  ${USERS.users['${username}'].tender_data.data.awards[1]}  status
-  Звірити відображення поля awards[1].status тендера із pending для усіх користувачів
+  \  Run Keyword And Ignore Error  Remove From Dictionary  ${USERS.users['${username}'].tender_data.data.awards[1]}  status
+  \  Звірити відображення поля awards[1].status тендера із pending для усіх користувачів
 
 
 Можливість завантажити протокол дискваліфікації другого кандидата
@@ -295,8 +295,8 @@ ${MODE}  auctions
   ...     ${USERS.users['${provider}'].broker}  ${USERS.users['${provider1}'].broker}
   ...     second_award_active_status
   :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${provider}  ${provider1}
-  Run Keyword And Ignore Error  Remove From Dictionary  ${USERS.users['${username}'].tender_data.data.awards[1]}  status
-  Звірити відображення поля awards[1].status тендера із active для усіх користувачів
+  \  Run Keyword And Ignore Error  Remove From Dictionary  ${USERS.users['${username}'].tender_data.data.awards[1]}  status
+  \  Звірити відображення поля awards[1].status тендера із active для усіх користувачів
 
 
 Відображення статусу неуспішного аукціону
