@@ -39,7 +39,7 @@ Default:
             accelerator: 720
         auctions:
             accelerator: 1440
-            auction:  [100, 30]
+            auction:  [40, 30]
     # Synchronization delay, in seconds
     timeout_on_wait: 300
 Quinta:
@@ -94,14 +94,14 @@ DZOauctions:
             accelerator: 720
         auctions:
             accelerator: 1440
-            auction:  [80, 80]
+            auction:  [60, 60]
     keywords_file: dzo
     roles:
         tender_owner:   DZO_Owner_auction
         provider:       DZO_Provider_auction
         provider1:      DZO_Provider1_auction
         viewer:         DZO_Viewer_auction
-    timeout_on_wait: 360
+    timeout_on_wait: 120
 uaceauction:
     intervals:
         default:
