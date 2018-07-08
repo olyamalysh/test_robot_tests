@@ -107,7 +107,7 @@ users:
         password: 12345678
         browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1366, 3000]
     DZO_Provider_auction:
         broker:   DZOauctions
         homepage: "http://dz3.byustudio.in.ua"
