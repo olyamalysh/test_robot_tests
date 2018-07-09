@@ -104,32 +104,32 @@ users:
         size:     [1366, 800]
     DZO_Owner:
         broker:   DZO
-        homepage: "http://dz2.byustudio.in.ua"
-        login:    ovramet.s@gmail.com
-        password: Password1
-        browser:  firefox
+        homepage: "http://dzo.byustudio.in.ua"
+        login:    formyqatesting@gmail.com
+        password: andriy85
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     DZO_Provider:
         broker:   DZO
-        homepage: "http://dz2.byustudio.in.ua"
-        login:    halyna.khimka@gmail.com
-        password: JHO5VUp5n
-        browser:  firefox
+        homepage: "http://dzo.byustudio.in.ua"
+        login:    ua.ceseller3@gmail.com
+        password: andriy85
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     DZO_Provider1:
         broker:   DZO
-        homepage: "http://dz2.byustudio.in.ua"
-        login:    dzoprovider2@gmail.com
-        password: UxYkGVVfk
-        browser:  firefox
+        homepage: "http://dzo.byustudio.in.ua"
+        login:    uac.eseller3@gmail.com
+        password: andriy85
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     DZO_Viewer:
         broker:   DZO
-        homepage: "http://dz2.byustudio.in.ua/?test_mode=guest"
-        browser:  firefox
+        homepage: "http://dzo.byustudio.in.ua/?test_mode=guest"
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     u25h8_Owner:
