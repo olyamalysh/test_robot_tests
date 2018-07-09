@@ -4,7 +4,8 @@ users:
             tenders:  [test.quintagroup.com, test.quintagroup.com]
             plans:    [test.quintagroup.com, test.quintagroup.com]
             auctions: [test.quintagroup.com, bc698baa8b814908bc75405ed3d63548]
-        api_key:  e9c3ccb8e8124f26941d5f9639a4ebc3
+        api_key:      e9c3ccb8e8124f26941d5f9639a4ebc3
+        dasu_api_key: e9c3ccb8e8124f26941d5f9639a4ebc3
         broker:   Quinta
         auth_edr: [test.quintagroup.com, f5111c99a97a45348d8165ba8fcf0d62]
         browser:  phantomjs
@@ -16,6 +17,7 @@ users:
             plans:    [test.quintagroup.com, test.quintagroup.com]
             auctions: [test.quintagroup.com, bc698baa8b814908bc75405ed3d63548]
         api_key:  e9c3ccb8e8124f26941d5f9639a4ebc3
+        dasu_api_key: ""
         broker:   Quinta
         auth_edr: [test.quintagroup.com, f5111c99a97a45348d8165ba8fcf0d62]
         browser:  phantomjs
@@ -27,6 +29,7 @@ users:
             plans:    [test.quintagroup.com, test.quintagroup.com]
             auctions: [test.quintagroup.com, bc698baa8b814908bc75405ed3d63548]
         api_key:  e9c3ccb8e8124f26941d5f9639a4ebc3
+        dasu_api_key: ""
         broker:   Quinta
         auth_edr: [test.quintagroup.com, f5111c99a97a45348d8165ba8fcf0d62]
         browser:  phantomjs
@@ -38,6 +41,7 @@ users:
             plans:    [test.quintagroup.com, test.quintagroup.com]
             auctions: [test.quintagroup.com, bc698baa8b814908bc75405ed3d63548]
         api_key:  e9c3ccb8e8124f26941d5f9639a4ebc3
+        dasu_api_key: ""
         broker:   Quinta
         auth_edr: [test.quintagroup.com, f5111c99a97a45348d8165ba8fcf0d62]
         browser:  phantomjs
@@ -45,12 +49,26 @@ users:
         size:     [1400, 900]
     Tender_Viewer:
         auth_ds:
-            tenders:  [test.quintagroup.com, test.quintagroup.com]
-            plans:    [test.quintagroup.com, test.quintagroup.com]
+            tenders:      [test.quintagroup.com, test.quintagroup.com]
+            plans:        [test.quintagroup.com, test.quintagroup.com]
+            monitorings:  [test.quintagroup.com, test.quintagroup.com]
             auctions: [test.quintagroup.com, bc698baa8b814908bc75405ed3d63548]
         api_key:  ""
+        dasu_api_key: ""
         broker:   Quinta
-        browser:  Chrome
+        browser:  firefox
+        auth_edr: [test.quintagroup.com, f5111c99a97a45348d8165ba8fcf0d62]
+        position: [0, 0]
+        size:     [1400, 900]
+    Dasu_User:
+        auth_ds:
+            monitorings:  [test.quintagroup.com, test.quintagroup.com]
+            plans:        [test.quintagroup.com, test.quintagroup.com]
+            tenders:      [test.quintagroup.com, test.quintagroup.com]
+        dasu_api_key:  9b3aaafba9fe4f4c95c3be3e1feaae31
+        api_key:  9b3aaafba9fe4f4c95c3be3e1feaae31
+        broker:   Quinta
+        browser:  phantomjs
         auth_edr: [test.quintagroup.com, f5111c99a97a45348d8165ba8fcf0d62]
         position: [0, 0]
         size:     [1400, 900]
@@ -149,7 +167,7 @@ users:
         homepage: "https://tenders.all.biz"
         login:    prozorroytenderowner@gmail.com
         password: 123456
-        browser:  Chrome
+        browser:  Firefox
         position: [0, 0]
         size:     [1366, 800]
     allbiz_Provider:
@@ -157,7 +175,7 @@ users:
         homepage: "https://tenders.all.biz"
         login:    prozorroyprovider1@gmail.com
         password: 123456
-        browser:  Chrome
+        browser:  Firefox
         position: [0, 0]
         size:     [1366, 800]
     allbiz_Provider1:
@@ -165,13 +183,13 @@ users:
         homepage: "https://tenders.all.biz"
         login:    prozorroyprovider2@gmail.com
         password: 123456
-        browser:  Chrome
+        browser:  Firefox
         position: [0, 0]
         size:     [1366, 800]
     allbiz_Viewer:
         broker:   tendersallbiz
         homepage: "https://tenders.all.biz"
-        browser:  Chrome
+        browser:  Firefox
         position: [0, 0]
         size:     [1366, 800]
     tenderonline_Owner:
@@ -258,25 +276,32 @@ users:
         size:     [800, 700]
     PrivatMarket_Viewer:
         broker:   PrivatMarket
-        homepage: "https://rc.privatmarket.ua/business/tenders?_locale=uk"
+        homepage: "https://zakupivli24.pb.ua/stage/ptr/registry.html?lang=uk"
+        email:    pbecommercetest2@ukr.net
+        browser:  chrome
+        position: [0, 0]
+        size:     [1920, 1080]
+    PrivatMarket_Provider:
+        broker:   PrivatMarket
+        homepage: "https://zakupivli24.pb.ua/stage/ptr/registry.html?lang=uk"
         email:    pbecommercetest2@ukr.net
         login:    380270010001
         password: password0001
         browser:  chrome
         position: [0, 0]
         size:     [1920, 1080]
-    PrivatMarket_Provider:
+    PrivatMarket_Provider1:
         broker:   PrivatMarket
-        homepage: "https://rc.privatmarket.ua/business/tenders"
+        homepage: "https://zakupivli24.pb.ua/stage/ptr/registry.html?lang=uk"
         email:    pbecommercetest2@ukr.net
-        login:    +380639405094
-        password: password5094
+        login:    380270010002
+        password: password0002
         browser:  chrome
-        position: [-1500, 0]
-        size:     [1000, 1000]
+        position: [0, 0]
+        size:     [1920, 1080]
     PrivatMarket_Owner:
         broker: PrivatMarket
-        homepage: "https://rc.privatmarket.ua/business/tenders?_locale=uk"
+        homepage: "https://zakupivli24.pb.ua/stage/ptr/registry.html?lang=uk"
         email: pbecommercetest1@ukr.net
         login: 380270010003
         password: password0003
@@ -706,6 +731,24 @@ users:
         browser:  chrome
         position: [0, 0]
         size:     [1100, 5000]
+    izi_provider:
+        broker:   izi
+        browser:  chrome
+        size:     [1280, 1024]
+        login: "test@izi.trade"
+        password: "qwerty1!"
+    izi_provider1:
+        broker:   izi
+        browser:  chrome
+        size:     [1280, 1024]
+        login: "test1@izi.trade"
+        password: "qwerty1!"
+    izi_viewer:
+        broker:   izi
+        browser:  chrome
+        size:     [1280, 1024]
+        login: "test@izi.trade"
+        password: "qwerty1!"
     tender_stage_Owner:
         broker:   tender_stage
         homepage: "http://tender.byustudio.in.ua"

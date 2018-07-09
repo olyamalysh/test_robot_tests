@@ -27,6 +27,19 @@ Resource           resource.robot
   Set To Dictionary  ${TENDER}  TENDER_UAID=${TENDER_UAID}
 
 
+Можливість створити об'єкт моніторингу
+  ${period_intervals}=  compute_intrs  ${BROKERS}  ${used_brokers}
+  ${accelerator}=  Get Variable Value  ${accelerator}
+  ${accelerator}=  Set Variable If  '${accelerator}' != '${None}'  ${accelerator}  ${period_intervals.default.accelerator}
+  ${monitoring_data}=  tets_monitoring_data  ${USERS.users['${dasu_user}'].tender_data.data.id}  ${accelerator}
+  Log  ${monitoring_data}
+  ${MNITORING_UAID}=  Run As  ${dasu_user}  Створити об'єкт моніторингу  ${monitoring_data}
+  ${MONITORING}=  Create Dictionary
+  Set Global Variable  ${MONITORING}
+  Set To Dictionary  ${USERS.users['${dasu_user}']}  initial_data=${monitoring_data}
+  Set To Dictionary  ${MONITORING}  MONITORING_UAID=${MNITORING_UAID}
+
+
 Можливість перевірити завантаження документів через Document Service
   :FOR  ${username}  IN  ${viewer}  ${tender_owner}
   \  ${status}=   Run Keyword And Return Status  List Should Contain Value  ${USERS.users['${username}'].tender_data.data}  documents
@@ -61,7 +74,7 @@ Resource           resource.robot
 
 Можливість знайти тендер по ідентифікатору для користувача ${username}
   Дочекатись синхронізації з майданчиком  ${username}
-  Run as  ${username}  Пошук тендера по ідентифікатору  ${TENDER['TENDER_UAID']}
+  Run As  ${username}  Пошук тендера по ідентифікатору  ${TENDER['TENDER_UAID']}
 
 
 Можливість знайти план по ідентифікатору
@@ -69,9 +82,19 @@ Resource           resource.robot
   \  Можливість знайти план по ідентифікатору для користувача ${username}
 
 
+Можливість знайти об'єкт моніторингу по ідентифікатору
+  :FOR  ${username}  IN  ${viewer}  ${dasu_user}
+  \  Можливість знайти об'єкт моніторингу по ідентифікатору для користувача ${username}
+
+
 Можливість знайти план по ідентифікатору для користувача ${username}
   Дочекатись синхронізації з майданчиком  ${username}
   Run as  ${username}  Пошук плану по ідентифікатору  ${TENDER['TENDER_UAID']}
+
+
+Можливість знайти об'єкт моніторингу по ідентифікатору для користувача ${username}
+  Дочекатись синхронізації з ДАСУ  ${username}
+  Run as  ${username}  Пошук об'єкта моніторингу по ідентифікатору  ${MONITORING['MONITORING_UAID']}
 
 
 Можливість знайти тендер за кошти донора для усіх користувачів
@@ -90,6 +113,10 @@ Resource           resource.robot
   Run as  ${username}  Пошук тендера по ідентифікатору  ${tender_id}  ${save_location}
 
 
+Можливість оприлюднити рішення про початок моніторингу
+  Run As  ${dasu_user}  Оприлюднити рішення про початок моніторингу  ${MONITORING['MONITORING_UAID']}
+
+
 Можливість змінити поле ${field_name} тендера на ${field_value}
   Run As  ${tender_owner}  Внести зміни в тендер  ${TENDER['TENDER_UAID']}  ${field_name}  ${field_value}
 
@@ -101,6 +128,73 @@ Resource           resource.robot
   Run As  ${tender_owner}  Внести зміни в план  ${TENDER['TENDER_UAID']}  ${field_name}  ${field_value}
 
 
+Можливість додати учасника процесу моніторингу
+  ${party_data}=  test_party
+  ${party}=  Create Dictionary  data=${party_data}
+  Run As  ${dasu_user}  Додати учасника процесу моніторингу  ${MONITORING['MONITORING_UAID']}  ${party}
+
+
+Можливість запитати в замовника пояснення
+  ${post_data}=  test_dialogue
+  Set To Dictionary  ${post_data.data}  relatedParty=${USERS.users['${dasu_user}'].monitoring_data.data.parties[0].id}
+  Run As  ${dasu_user}  Запитати в замовника пояснення  ${MONITORING['MONITORING_UAID']}  ${post_data}
+
+
+Можливість надати пояснення замовником
+  ${post_data}=  test_dialogue
+  Set To Dictionary  ${post_data.data}  relatedPost=${USERS.users['${dasu_user}'].monitoring_data.data.posts[0].id}
+  Run As  ${tender_owner}  Надати пояснення замовником  ${MONITORING['MONITORING_UAID']}  ${post_data}
+
+
+Можливість надати відповідь користувачем ДАСУ
+  ${post_data}=  test_dialogue
+  Set To Dictionary  ${post_data.data}  relatedPost=${USERS.users['${dasu_user}'].monitoring_data.data.posts[2].id}
+  Run As  ${dasu_user}  Надати відповідь користувачем ДАСУ  ${MONITORING['MONITORING_UAID']}  ${post_data}
+
+
+Можливість надати висновок про наявність порушення в тендері
+  ${conclusion_data}=  test_conclusion  ${True}  ${USERS.users['${dasu_user}'].monitoring_data.data.parties[0].id}
+  Run As  ${dasu_user}  Надати висновок про наявність/відсутність порушення в тендері  ${MONITORING['MONITORING_UAID']}  ${conclusion_data}
+
+
+Можливість надати висновок про відсутність порушення в тендері
+  ${conclusion_data}=  test_conclusion  ${False}  ${USERS.users['${dasu_user}'].monitoring_data.data.parties[0].id}
+  Run As  ${dasu_user}  Надати висновок про наявність/відсутність порушення в тендері  ${MONITORING['MONITORING_UAID']}  ${conclusion_data}
+
+
+Можливість змінити статус об’єкта моніторингу на ${status}
+  ${conclusion_data}=  test_status_data  ${status}  ${USERS.users['${dasu_user}'].monitoring_data.data.parties[0].id}
+  Run As  ${dasu_user}  Змінити статус об’єкта моніторингу  ${MONITORING['MONITORING_UAID']}  ${conclusion_data}
+
+
+Можливість надати пояснення замовником з власної ініціативи
+  ${party_data}=  test_dialogue
+  Run As  ${tender_owner}  Надати пояснення замовником з власної ініціативи  ${MONITORING['MONITORING_UAID']}  ${party_data}
+
+
+Можливість надати звіт про усунення порушення замовником
+  ${description}=  create_fake_sentence
+  ${resolution}=  munch_dict  data=${True}
+  Set To Dictionary   ${resolution.data}  description=${description}
+  ${file_path}  ${file_name}  ${file_content}=  create_fake_doc
+  Run As  ${tender_owner}  Надати звіт про усунення порушення замовником  ${MONITORING['MONITORING_UAID']}  ${resolution}  ${file_path}
+
+
+Можливість зазначити, що порушення було оскаржено в суді
+  ${description}=  create_fake_sentence
+  ${appeal}=  munch_dict  data=${True}
+  Set To Dictionary   ${appeal.data}  description=${description}
+  ${file_path}  ${file_name}  ${file_content}=  create_fake_doc
+  Run As  ${tender_owner}  Зазначити, що порушення було оскаржено в суді  ${MONITORING['MONITORING_UAID']}  ${appeal}  ${file_path}
+
+
+Можливість оприлюднути рішення про усунення порушення
+  ${report_data}=  test_elimination_report
+  ...      ${USERS.users['${dasu_user}'].monitoring_data.data.conclusion.violationType[0]}
+  ...      ${USERS.users['${dasu_user}'].monitoring_data.data.parties[0].id}
+  Run As  ${dasu_user}  Оприлюднити рішення про усунення порушення  ${MONITORING['MONITORING_UAID']}  ${report_data}
+
+
 Можливість додати документацію до тендера
   ${file_path}  ${file_name}  ${file_content}=  create_fake_doc
   Run As  ${tender_owner}  Завантажити документ  ${file_path}  ${TENDER['TENDER_UAID']}
@@ -110,6 +204,18 @@ Resource           resource.robot
   ...      doc_id=${doc_id}
   ...      doc_content=${file_content}
   Set To Dictionary  ${USERS.users['${tender_owner}']}  tender_document=${tender_document}
+  Remove File  ${file_path}
+
+
+Можливість додати документацію до об'єкта моніторингу
+  ${file_path}  ${file_name}  ${file_content}=  create_fake_doc
+  Run As  ${dasu_user}  Завантажити документ до об'єкта моніторингу  ${file_path}  ${MONITORING['MONITORING_UAID']}  decision
+  ${doc_id}=  get_id_from_string  ${file_name}
+  ${monitoring_document}=  Create Dictionary
+  ...      doc_name=${file_name}
+  ...      doc_id=${doc_id}
+  ...      doc_content=${file_content}
+  Set To Dictionary  ${USERS.users['${dasu_user}']}  monitoring_document=${monitoring_document}
   Remove File  ${file_path}
 
 
@@ -172,6 +278,10 @@ Resource           resource.robot
 
 Звірити відображення поля ${field} тендера для користувача ${username}
   Звірити поле тендера  ${username}  ${TENDER['TENDER_UAID']}  ${USERS.users['${tender_owner}'].initial_data}  ${field}
+
+
+Звірити відображення поля ${field} об'єкта моніторингу для користувача ${username}
+  Звірити поле об'єкта моніторингу  ${username}  ${MONITORING['MONITORING_UAID']}  ${USERS.users['${dasu_user}'].initial_data}  ${field}
 
 
 Звірити відображення поля ${field} плану для користувача ${username}
@@ -299,6 +409,15 @@ Resource           resource.robot
 
 Отримати дані із поля ${field} тендера для користувача ${username}
   Отримати дані із тендера  ${username}  ${TENDER['TENDER_UAID']}  ${field}
+
+
+Отримати дані із поля ${field} об'єкта моніторингу для усіх користувачів
+  :FOR  ${username}  IN  ${viewer}  ${tender_owner}  ${dasu_user}
+  \  Отримати дані із поля ${field} об'єкта моніторингу для користувача ${username}
+
+
+Отримати дані із поля ${field} об'єкта моніторингу для користувача ${username}
+  Отримати дані із об'єкта моніторингу  ${username}  ${MONITORING['MONITORING_UAID']}  ${field}
 
 ##############################################################################################
 #             LOTS
@@ -807,6 +926,27 @@ Resource           resource.robot
   Remove File  ${file_path}
 
 
+Можливість створити скаргу про виправлення визначення ${award_index} переможця із документацією
+  ${claim}=  Підготувати дані для подання вимоги
+  ${file_path}  ${file_name}  ${file_content}=  create_fake_doc
+  ${complaintID}=  Run As  ${provider}
+  ...      Створити скаргу про виправлення визначення переможця
+  ...      ${TENDER['TENDER_UAID']}
+  ...      ${claim}
+  ...      ${award_index}
+  ...      ${file_path}
+  ${doc_id}=  get_id_from_string  ${file_name}
+  ${claim_data}=  Create Dictionary
+  ...      claim=${claim}
+  ...      complaintID=${complaintID}
+  ...      doc_name=${file_name}
+  ...      doc_id=${doc_id}
+  ...      doc_content=${file_content}
+  ${claim_data}=  munch_dict  arg=${claim_data}
+  Set To Dictionary  ${USERS.users['${provider}']}  claim_data  ${claim_data}
+  Remove File  ${file_path}
+
+
 Можливість скасувати вимогу про виправлення умов закупівлі
   ${cancellation_reason}=  create_fake_sentence
   ${data}=  Create Dictionary
@@ -1027,6 +1167,7 @@ Resource           resource.robot
 Можливість підтвердити задоволення вимоги про виправлення умов закупівлі
   ${data}=  Create Dictionary
   ...      satisfied=${True}
+  ...      status=resolved
   ${confirmation_data}=  Create Dictionary  data=${data}
   ${confirmation_data}=  munch_dict  arg=${confirmation_data}
   Run As  ${provider}
@@ -1035,32 +1176,6 @@ Resource           resource.robot
   ...      ${USERS.users['${provider}']['tender_claim_data']['complaintID']}
   ...      ${confirmation_data}
   Set To Dictionary  ${USERS.users['${provider}']['tender_claim_data']}  claim_answer_confirm  ${confirmation_data}
-
-
-Можливість заперечити незадоволення вимоги про виправлення умов закупівлі для ${status} відповіді
-  ${data}=  Create Dictionary
-  ...      satisfied=${False}
-  ${confirmation_data}=  Create Dictionary  data=${data}
-  ${confirmation_data}=  munch_dict  arg=${confirmation_data}
-  Run As  ${provider}
-  ...      Підтвердити вирішення вимоги про виправлення умов закупівлі
-  ...      ${TENDER['TENDER_UAID']}
-  ...      ${USERS.users['${provider}']['tender_claim_data']['complaintID']}
-  ...      ${confirmation_data}
-  Set To Dictionary  ${USERS.users['${provider}']['tender_claim_data']}  claim_answer_confirm  ${confirmation_data}
-
-
-Можливість підтвердити задоволення вимоги про виправлення умов лоту
-  ${data}=  Create Dictionary
-  ...      satisfied=${True}
-  ${confirmation_data}=  Create Dictionary  data=${data}
-  ${confirmation_data}=  munch_dict  arg=${confirmation_data}
-  Run As  ${provider}
-  ...      Підтвердити вирішення вимоги про виправлення умов лоту
-  ...      ${TENDER['TENDER_UAID']}
-  ...      ${USERS.users['${provider}']['lot_claim_data']['complaintID']}
-  ...      ${confirmation_data}
-  Set To Dictionary  ${USERS.users['${provider}']['lot_claim_data']}  claim_answer_confirm  ${confirmation_data}
 
 
 Можливість підтвердити задоволення вимоги про виправлення визначення ${award_index} переможця

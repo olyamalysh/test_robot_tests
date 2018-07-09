@@ -12,7 +12,6 @@
 -i create_tender
 -i find_tender
 -i tender_view
--i lot_view
 -i tender_view_unit_code
 -i tender_view_coordinates
 
