@@ -204,8 +204,10 @@ centrex:
             accelerator: 1440
             auction:  [45, 50]
         lots:
-            accelerator: 720
-            auction:  [35, 30]
+            accelerator: 120
+        auctions:
+            accelerator: 1440
+            auction:  [60, 60]
     keywords_file: centrex
     roles:
         tender_owner:   centrex_Owner
