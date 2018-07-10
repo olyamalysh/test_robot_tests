@@ -141,7 +141,7 @@ opentenderauction:
         provider:       opentender_Provider_auction
         provider1:      opentender_Provider1_auction
         viewer:         opentender_Viewer_auction
-    timeout_on_wait: 90
+    timeout_on_wait: 120
 brizol:
     intervals:
         default:
@@ -216,7 +216,7 @@ centrex:
         provider:   centrex_Provider
         provider1:   centrex_Provider1
         viewer:   centrex_Viewer
-    timeout_on_wait: 90
+    timeout_on_wait: 120
 expagency:
     intervals:
         default:
