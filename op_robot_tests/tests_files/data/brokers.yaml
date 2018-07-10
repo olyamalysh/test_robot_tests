@@ -131,15 +131,17 @@ opentenderauction:
             accelerator: 1440
             auction:  [45, 50]
         lots:
-            accelerator: 720
-            auction:  [35, 30]
+            accelerator: 120
+        auctions:
+            accelerator: 1440
+            auction:  [60, 60]
     keywords_file: opentender
     roles:
         tender_owner:   opentender_Owner_auction
         provider:       opentender_Provider_auction
         provider1:      opentender_Provider1_auction
         viewer:         opentender_Viewer_auction
-    timeout_on_wait: 180
+    timeout_on_wait: 90
 brizol:
     intervals:
         default:
@@ -214,7 +216,7 @@ centrex:
         provider:   centrex_Provider
         provider1:   centrex_Provider1
         viewer:   centrex_Viewer
-    timeout_on_wait: 180
+    timeout_on_wait: 90
 expagency:
     intervals:
         default:
