@@ -216,7 +216,7 @@ centrex:
         provider:   centrex_Provider
         provider1:   centrex_Provider1
         viewer:   centrex_Viewer
-    timeout_on_wait: 150
+    timeout_on_wait: 120
 expagency:
     intervals:
         default:
