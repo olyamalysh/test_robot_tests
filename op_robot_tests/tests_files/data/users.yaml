@@ -756,7 +756,7 @@ users:
         password: andriy85
         browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1366, 2000]
     tender_stage_Provider:
         broker:   tender_stage
         homepage: "http://tender.byustudio.in.ua"
@@ -764,7 +764,7 @@ users:
         password: andriy85
         browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1366, 2000]
     tender_stage_Provider1:
         broker:   tender_stage
         homepage: "http://tender.byustudio.in.ua"
@@ -772,7 +772,7 @@ users:
         password: andriy85
         browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1366, 2000]
     tender_stage_Provider2:
         broker:   tender_stage
         homepage: "http://tender.byustudio.in.ua"
@@ -780,10 +780,10 @@ users:
         password: andriy85
         browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1366, 2000]
     tender_stage_Viewer:
         broker:   tender_stage
         homepage: "http://tender.byustudio.in.ua"
         browser:  Chrome
         position: [0, 0]
-        size:     [1366, 800]
+        size:     [1366, 2000]
