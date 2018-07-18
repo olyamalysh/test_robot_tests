@@ -51,6 +51,10 @@ def create_fake_dgfID():
 
 
 def create_fake_date():
+    return get_now().isoformat()
+
+
+def create_fake_DecisionDate():
     return get_now().strftime('%Y-%m-%d')
 
 
@@ -382,7 +386,10 @@ def test_tender_data_dgf_insider(params, submissionMethodDetails):
     data['dgfDecisionID'] = fake.dgfDecisionID()
     data['dgfDecisionDate'] = (get_now() + timedelta(days=-2)).strftime('%Y-%m-%d')
     data['tenderAttempts'] = fake.random_int(min=1, max=8)
-
+    data['auctionParameters'] = {
+            'type': 'insider',
+            'dutchSteps': random.choice([random.randrange(10, 90, 10), 99, 100])
+            }
     del data["procuringEntity"]
     del data['minimalStep']
 
