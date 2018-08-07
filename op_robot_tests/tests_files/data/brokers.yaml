@@ -114,7 +114,7 @@ uaceauction:
             accelerator: 720
         auctions:
             accelerator: 1440
-            auction:  [100, 60]
+            auction:  [25, 60]
     keywords_file: uace
     roles:
         tender_owner:   uace_Owner_auction
