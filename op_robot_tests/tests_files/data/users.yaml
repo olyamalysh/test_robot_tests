@@ -135,7 +135,7 @@ users:
         homepage: "http://test-eauction.uace.com.ua"
         login:    testprozorroyowner@gmail.com
         password: 123456
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     uace_Provider_auction:
@@ -143,7 +143,7 @@ users:
         homepage: "http://test-eauction.uace.com.ua"
         login:    testprozorroprovider@gmail.com
         password: 123456
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     uace_Provider1_auction:
@@ -151,7 +151,7 @@ users:
         homepage: "http://test-eauction.uace.com.ua"
         login:    testprozorroprovider1@gmail.com
         password: 123456
-        browser:  Firefox
+        browser:  Chrome
         position: [0, 0]
         size:     [1366, 800]
     uace_Viewer_auction:
